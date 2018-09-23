@@ -47,3 +47,5 @@ http://localhost:3000/api/projects
 * Delete/:id
 
     Delete an object by id
+### Postman
+Please use postman for do the requests, here is the file that contains the actions [postmanActions.postman_collection.json](https://github.com/Reverse117/developing-db/blob/master/postmanActions.postman_collection.json)
