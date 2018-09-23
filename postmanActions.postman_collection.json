@@ -1,0 +1,128 @@
+{
+	"info": {
+		"_postman_id": "5ef4f09c-29bc-4631-a1eb-f6d8f679dae8",
+		"name": "postmanActions",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Project Actions",
+			"item": [
+				{
+					"name": "Add Project",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Project 1\",\n\t\"description\": \"First Project\",\n\t\"storeNumber\": 7,\n\t\"m2\": 100,\n\t\"location\": \"Plaza Santa Fe\",\n\t\"localReception\": \"2018-09-23T00:00:00.000Z\",\n\t\"openingDate\": \"2018-09-28T00:00:00.000Z\",\n\t\"furnitureDate\": \"2018-09-26T00:00:00.000Z\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/projects",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"projects"
+							]
+						},
+						"description": "Add a new project"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Projects",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Ryan\",\n\t\"email\": \"email1@email.com\",\n\t\"password\": \"234\",\n\t\"mobile\": 5530318080,\n\t\"userType\": 2\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/projects",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"projects"
+							]
+						},
+						"description": "Get all the projects"
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Project",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Project 1\",\n\t\"description\": \"First Project\",\n\t\"storeNumber\": 7,\n\t\"m2\": 200,\n\t\"location\": \"Plaza Santa Fe\",\n\t\"localReception\": \"2018-09-23T00:00:00.000Z\",\n\t\"openingDate\": \"2018-09-28T00:00:00.000Z\",\n\t\"furnitureDate\": \"2018-09-26T00:00:00.000Z\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/projects/5ba808f91e624018681b3f08",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"projects",
+								"5ba808f91e624018681b3f08"
+							]
+						},
+						"description": "Edit a project, you need the '_id' of the project"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Project",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:3000/api/projects/5ba808f91e624018681b3f08",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"projects",
+								"5ba808f91e624018681b3f08"
+							]
+						},
+						"description": "Delete the project, you need the '_id' of the project"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
