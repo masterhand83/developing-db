@@ -34,16 +34,16 @@ http://localhost:3000/api/projects
 ### Methods
 * Get
 
-Get all the objects
+    Get all the objects
 * Get/:id
 
-Get an object by id
+    Get an object by id
 * Post
 
-Add an object
+    Add an object
 * Put/:id
 
-Edit an object by id
+    Edit an object by id
 * Delete/:id
 
-Delete an object by id
+    Delete an object by id
