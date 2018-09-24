@@ -9,9 +9,9 @@
 			"name": "Project Actions",
 			"item": [
 				{
-					"name": "Add Project",
+					"name": "Get Project",
 					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -20,10 +20,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Project 1\",\n\t\"description\": \"First Project\",\n\t\"storeNumber\": 7,\n\t\"m2\": 100,\n\t\"location\": \"Plaza Santa Fe\",\n\t\"localReception\": \"2018-09-23T00:00:00.000Z\",\n\t\"openingDate\": \"2018-09-28T00:00:00.000Z\",\n\t\"furnitureDate\": \"2018-09-26T00:00:00.000Z\"\n}"
+							"raw": "{\n\t\"name\": \"Ryan\",\n\t\"email\": \"email1@email.com\",\n\t\"password\": \"234\",\n\t\"mobile\": 5530318080,\n\t\"userType\": 2\n}"
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/projects",
+							"raw": "http://localhost:3000/api/projects/id",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -31,10 +31,11 @@
 							"port": "3000",
 							"path": [
 								"api",
-								"projects"
+								"projects",
+								"id"
 							]
 						},
-						"description": "Add a new project"
+						"description": "Get the project with that id"
 					},
 					"response": []
 				},
@@ -69,6 +70,36 @@
 					"response": []
 				},
 				{
+					"name": "Add Project",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Project 1\",\n\t\"description\": \"First Project\",\n\t\"storeNumber\": 7,\n\t\"m2\": 100,\n\t\"location\": \"Plaza Santa Fe\",\n\t\"localReception\": \"2018-09-23T00:00:00.000Z\",\n\t\"openingDate\": \"2018-09-28T00:00:00.000Z\",\n\t\"furnitureDate\": \"2018-09-26T00:00:00.000Z\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/projects",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"projects"
+							]
+						},
+						"description": "Add a new project"
+					},
+					"response": []
+				},
+				{
 					"name": "Edit Project",
 					"request": {
 						"method": "PUT",
@@ -83,7 +114,7 @@
 							"raw": "{\n\t\"name\": \"Project 1\",\n\t\"description\": \"First Project\",\n\t\"storeNumber\": 7,\n\t\"m2\": 200,\n\t\"location\": \"Plaza Santa Fe\",\n\t\"localReception\": \"2018-09-23T00:00:00.000Z\",\n\t\"openingDate\": \"2018-09-28T00:00:00.000Z\",\n\t\"furnitureDate\": \"2018-09-26T00:00:00.000Z\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/projects/5ba808f91e624018681b3f08",
+							"raw": "http://localhost:3000/api/projects/id",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -92,7 +123,7 @@
 							"path": [
 								"api",
 								"projects",
-								"5ba808f91e624018681b3f08"
+								"id"
 							]
 						},
 						"description": "Edit a project, you need the '_id' of the project"
@@ -106,7 +137,7 @@
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "http://localhost:3000/api/projects/5ba808f91e624018681b3f08",
+							"raw": "http://localhost:3000/api/projects/id",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -115,10 +146,144 @@
 							"path": [
 								"api",
 								"projects",
-								"5ba808f91e624018681b3f08"
+								"id"
 							]
 						},
 						"description": "Delete the project, you need the '_id' of the project"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Actions",
+			"item": [
+				{
+					"name": "Get User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:3000/api/id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"id"
+							]
+						},
+						"description": "Get the user with that id"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:3000/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users"
+							]
+						},
+						"description": "Get all the Users"
+					},
+					"response": []
+				},
+				{
+					"name": "Add User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"General Manager\",\n\t\"email\": \"email@email.com\",\n\t\"password\": \"123\",\n\t\"mobile\": 5530318080,\n\t\"userType\": 0,\n\t\"projects\": []\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								""
+							]
+						},
+						"description": "Add a new user"
+					},
+					"response": []
+				},
+				{
+					"name": "Edit User",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"General Manager\",\n\t\"email\": \"email@email.com\",\n\t\"password\": \"123\",\n\t\"mobile\": 5530318080,\n\t\"userType\": 0,\n\t\"projects\": [\"project1\", \"project2\"]\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"id"
+							]
+						},
+						"description": "Edit a user, you need the '_id' of the user"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:3000/api/users/id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"id"
+							]
+						},
+						"description": "Delete the user, you need the '_id' of the user"
 					},
 					"response": []
 				}

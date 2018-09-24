@@ -2,7 +2,9 @@ const User = require('../models/user');
 const userCtrl = {};
 
 userCtrl.getUsers = async (req, res) => {
-    const user = await User.find();
+    //populate().exec() es para agregar los datos de los objetos projects
+    //en populate va el nombre del dato como esta en el schema User NO EL NOMBRE DEL SCHEMA PROJECT
+    const user = await User.find().populate("projects").exec();
     res.json(user);
 };
 
@@ -16,7 +18,9 @@ userCtrl.createUser = async (req,res) => {
 
 userCtrl.getUser = async (req, res) => {
     const { id } = req.params;
-    const user = await User.findById(id);
+    //populate().exec() es para agregar los datos de los objetos projects
+    //en populate va el nombre del dato como esta en el schema User NO EL NOMBRE DEL SCHEMA PROJECT
+    const user = await User.findById(id).populate("projects").exec();
     res.json(user);
 };
 
@@ -27,8 +31,8 @@ userCtrl.editUser = async (req, res) => {
         email: req.body.email,
         password: req.body.password,
         mobile:  req.body.mobile,
-        userType: req.body.userType/*,
-        project: req.body.project*/
+        userType: req.body.userType,
+        projects: req.body.projects
     };
     await User.findByIdAndUpdate(id, {$set: user}, {new: true});
     res.json({
