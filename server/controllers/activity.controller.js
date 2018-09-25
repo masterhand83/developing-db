@@ -23,9 +23,10 @@ activityCtrl.getActivity = async (req, res) => {
 activityCtrl.editActivity = async (req, res) => {
     const { id } = req.params;
     const activity = {
-        initialDate: req.body.initialDate,
-        endDate: req.body.endDate,
-        progress: req.body.progress,
+        name: req.body.name,
+        description: req.body.description,
+        start: req.body.start,
+        end: req.body.end,
         objective: req.body.objective,
         deliverable: req.body.deliverable
     };

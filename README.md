@@ -27,9 +27,14 @@ npm run dev
 ```
 ### Routes
 * Users
+
 http://localhost:3000/api/users
 * Projects
+
 http://localhost:3000/api/projects
+* Activities
+
+http://localhost:3000/api/activities
 
 ### Methods
 * Get
