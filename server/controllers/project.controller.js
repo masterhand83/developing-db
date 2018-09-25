@@ -30,7 +30,8 @@ projectCtrl.editProject = async (req, res) => {
         location: req.body.location,
         localReception: req.body.localReception,
         openingDate: req.body.openingDate,
-        furnitureDate: req.body.furnitureDate
+        furnitureDate: req.body.furnitureDate,
+        activities: req.body.activities
     };
     await Project.findByIdAndUpdate(id, {$set: project}, {new: true});
     res.json({

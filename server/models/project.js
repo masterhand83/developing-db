@@ -9,7 +9,8 @@ const ProjectSchema = new Schema({
     location: { type: String, required: true },
     localReception: { type: Date, required: true },
     openingDate: { type: Date, required: true },
-    furnitureDate: { type: Date, required: true }
+    furnitureDate: { type: Date, required: true },
+    activities: [{ type: Schema.Types.ObjectId, ref: "Activity", required: false }]
 });
 
-module.exports = mongoose.model('Project', ProjectSchema)
+module.exports = mongoose.model('Project', ProjectSchema);
