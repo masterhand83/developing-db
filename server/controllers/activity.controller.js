@@ -1,42 +1,27 @@
 const Activity = require('../models/activity');
 const activityCtrl = {};
 
+var moment = require('moment');
+moment().format();
+
 activityCtrl.getActivities = async (req, res) => {
     const activity = await Activity.find();
     res.json(activity);
 };
 
 activityCtrl.createActivitiesForNewProject = async (req,res) => {
-    const date = new Date();
-    const sem1 = new Date();
-    const sem2 = new Date();
-    const sem3 = new Date();
-    const sem4 = new Date();
-    const sem5 = new Date();
-    const sem6 = new Date();
-    const sem7 = new Date();
-    const sem8 = new Date();
-    const sem10 = new Date();
-    sem1.setDate(date.getDate()+7);
-    sem2.setDate(date.getDate()+14);
-    sem3.setDate(date.getDate()+21);
-    sem4.setDate(date.getDate()+28);
-    sem5.setDate(date.getDate()+35);
-    sem6.setDate(date.getDate()+42);
-    sem7.setDate(date.getDate()+49);
-    sem8.setDate(date.getDate()+56);
-    sem10.setDate(date.getDate()+70);
-    console.log(sem1);
-    console.log(sem2);
-    console.log(sem3);
-    console.log(sem4);
-    console.log(sem5);
-    console.log(sem6);
-    console.log(sem7);
-    console.log(sem8);
-    console.log(sem10);
-    activity1 = new Activity({name: "LEVANTAMIENTO FISICO Y FOTOGRAFICO DEL LOCAL", start: date, end: sem1});
-    activity2 = new Activity({name: "PROYECTO ARQUITECTONICO", start: date, end: sem2});
+    var now = moment();
+    var sem1 = moment().add(1, 'w');
+    var sem2 = moment().add(2, 'w');
+    var sem3 = moment().add(3, 'w');
+    var sem4 = moment().add(4, 'w');
+    var sem5 = moment().add(5, 'w');
+    var sem6 = moment().add(6, 'w');
+    var sem7 = moment().add(7, 'w');
+    var sem8 = moment().add(8, 'w');
+    var sem10 = moment().add(10, 'w');
+    activity1 = new Activity({name: "LEVANTAMIENTO FISICO Y FOTOGRAFICO DEL LOCAL", start: now, end: sem1});
+    activity2 = new Activity({name: "PROYECTO ARQUITECTONICO", start: now, end: sem2});
     activity3 = new Activity({name: "PROYECTO ELECTRICO", start: sem1, end: sem2});
     activity4 = new Activity({name: "PROYECTO DE AIRE", start: sem1, end: sem2});
     activity5 = new Activity({name: "PEDIR CORTINA", start: sem1, end: sem5});
