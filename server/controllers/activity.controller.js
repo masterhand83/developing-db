@@ -20,38 +20,38 @@ activityCtrl.createActivitiesForNewProject = async (req,res) => {
     var sem7 = moment().add(7, 'w');
     var sem8 = moment().add(8, 'w');
     var sem10 = moment().add(10, 'w');
-    activity1 = new Activity({name: "LEVANTAMIENTO FISICO Y FOTOGRAFICO DEL LOCAL", start: now, end: sem1});
-    activity2 = new Activity({name: "PROYECTO ARQUITECTONICO", start: now, end: sem2});
-    activity3 = new Activity({name: "PROYECTO ELECTRICO", start: sem1, end: sem2});
-    activity4 = new Activity({name: "PROYECTO DE AIRE", start: sem1, end: sem2});
-    activity5 = new Activity({name: "PEDIR CORTINA", start: sem1, end: sem5});
-    activity6 = new Activity({name: "CONFIRMACION DE PEDIDO Y MEDIDAS DE CANCELES", start: sem1, end: sem5});
-    activity7 = new Activity({name: "PEDIDO DE LETEROS", start: sem1, end: sem6});
-    activity8 = new Activity({name: "PEDIDO DE MOBILIARIO", start: sem1, end: sem7});
-    activity9 = new Activity({name: "COMPRA DE TRANSFORMADOR", start: sem1, end: sem5});
-    activity10 = new Activity({name: "ANTICIPO A PROVEDORES", start: sem2, end: sem3});
-    activity11 = new Activity({name: "PEDIDO DE PISO", start: sem2, end: sem4});
-    activity12 = new Activity({name: "PEDIDO DE LUMINARIAS", start: sem1, end: sem6});
-    activity13 = new Activity({name: "ENTREGA DE PISO", start: sem3, end: sem4});
-    activity14 = new Activity({name: "COLOCACION DE PISO", start: sem3, end: sem7});
-    activity15 = new Activity({name: "LIMPIEZA", start: sem3, end: sem10});
-    activity16 = new Activity({name: "INSTALACION ELECTRICA", start: sem3, end: sem8});
-    activity17 = new Activity({name: "GESTORIA ELECTRICA", start: sem3, end: sem10});
-    activity18 = new Activity({name: "CARPINTERIA", start: sem3, end: sem8});
-    activity19 = new Activity({name: "TABLAROCA Y PINTURA", start: sem3, end: sem8});
-    activity20 = new Activity({name: "INSTALACION DE AIRE", start: sem3, end: sem8});
-    activity21 = new Activity({name: "ENTREGA DE CREMALLERAS", start: sem3, end: sem4});
-    activity22 = new Activity({name: "ENTREGA DE TIENDA (SUPERVISION)", start: sem3, end: sem10});
-    activity23 = new Activity({name: "ENTREGA E INSTALACION DE CORTINA", start: sem4, end: sem5});
-    activity24 = new Activity({name: "INSTALACION DE CANCELES", start: sem4, end: sem7});
-    activity25 = new Activity({name: "MEDIA TENSION", start: sem4, end: sem7});
-    activity26 = new Activity({name: "ENTREGA DE LUMINARIAS", start: sem5, end: sem6});
-    activity27 = new Activity({name: "HERRERIAS", start: sem5, end: sem7});
-    activity28 = new Activity({name: "LETREROS Y GRAFIOS", start: sem5, end: sem6});
-    activity29 = new Activity({name: "PLOMERIA", start: sem6, end: sem7});
-    activity30 = new Activity({name: "BODEGA", start: sem6, end: sem8});
-    activity31 = new Activity({name: "ENTREGA DE MOBILIARIO METALICO", start: sem6, end: sem8});
-    activity32 = new Activity({name: "APERTURA", start: sem8, end: sem10});
+    activity1 = new Activity({name: "LEVANTAMIENTO FISICO Y FOTOGRAFICO DEL LOCAL", start: now, end: sem1, priority: 0, finished: false});
+    activity2 = new Activity({name: "PROYECTO ARQUITECTONICO", start: now, end: sem2, priority: 0, finished: false});
+    activity3 = new Activity({name: "PROYECTO ELECTRICO", start: sem1, end: sem2, priority: 0, finished: false});
+    activity4 = new Activity({name: "PROYECTO DE AIRE", start: sem1, end: sem2, priority: 0, finished: false});
+    activity5 = new Activity({name: "PEDIR CORTINA", start: sem1, end: sem5, priority: 0, finished: false});
+    activity6 = new Activity({name: "CONFIRMACION DE PEDIDO Y MEDIDAS DE CANCELES", start: sem1, end: sem5, priority: 0, finished: false});
+    activity7 = new Activity({name: "PEDIDO DE LETEROS", start: sem1, end: sem6, priority: 0, finished: false});
+    activity8 = new Activity({name: "PEDIDO DE MOBILIARIO", start: sem1, end: sem7, priority: 0, finished: false});
+    activity9 = new Activity({name: "COMPRA DE TRANSFORMADOR", start: sem1, end: sem5, priority: 0, finished: false});
+    activity10 = new Activity({name: "ANTICIPO A PROVEDORES", start: sem2, end: sem3, priority: 0, finished: false});
+    activity11 = new Activity({name: "PEDIDO DE PISO", start: sem2, end: sem4, priority: 0, finished: false});
+    activity12 = new Activity({name: "PEDIDO DE LUMINARIAS", start: sem1, end: sem6, priority: 0, finished: false});
+    activity13 = new Activity({name: "ENTREGA DE PISO", start: sem3, end: sem4, priority: 0, finished: false});
+    activity14 = new Activity({name: "COLOCACION DE PISO", start: sem3, end: sem7, priority: 0, finished: false});
+    activity15 = new Activity({name: "LIMPIEZA", start: sem3, end: sem10, priority: 0, finished: false});
+    activity16 = new Activity({name: "INSTALACION ELECTRICA", start: sem3, end: sem8, priority: 0, finished: false});
+    activity17 = new Activity({name: "GESTORIA ELECTRICA", start: sem3, end: sem10, priority: 0, finished: false});
+    activity18 = new Activity({name: "CARPINTERIA", start: sem3, end: sem8, priority: 0, finished: false});
+    activity19 = new Activity({name: "TABLAROCA Y PINTURA", start: sem3, end: sem8, priority: 0, finished: false});
+    activity20 = new Activity({name: "INSTALACION DE AIRE", start: sem3, end: sem8, priority: 0, finished: false});
+    activity21 = new Activity({name: "ENTREGA DE CREMALLERAS", start: sem3, end: sem4, priority: 0, finished: false});
+    activity22 = new Activity({name: "ENTREGA DE TIENDA (SUPERVISION)", start: sem3, end: sem10, priority: 0, finished: false});
+    activity23 = new Activity({name: "ENTREGA E INSTALACION DE CORTINA", start: sem4, end: sem5, priority: 0, finished: false});
+    activity24 = new Activity({name: "INSTALACION DE CANCELES", start: sem4, end: sem7, priority: 0, finished: false});
+    activity25 = new Activity({name: "MEDIA TENSION", start: sem4, end: sem7, priority: 0, finished: false});
+    activity26 = new Activity({name: "ENTREGA DE LUMINARIAS", start: sem5, end: sem6, priority: 0, finished: false});
+    activity27 = new Activity({name: "HERRERIAS", start: sem5, end: sem7, priority: 0, finished: false});
+    activity28 = new Activity({name: "LETREROS Y GRAFIOS", start: sem5, end: sem6, priority: 0, finished: false});
+    activity29 = new Activity({name: "PLOMERIA", start: sem6, end: sem7, priority: 0, finished: false});
+    activity30 = new Activity({name: "BODEGA", start: sem6, end: sem8, priority: 0, finished: false});
+    activity31 = new Activity({name: "ENTREGA DE MOBILIARIO METALICO", start: sem6, end: sem8, priority: 0, finished: false});
+    activity32 = new Activity({name: "APERTURA", start: sem8, end: sem10, priority: 0, finished: false});
     await activity1.save();
     await activity2.save();
     await activity3.save();
@@ -110,8 +110,10 @@ activityCtrl.editActivity = async (req, res) => {
         description: req.body.description,
         start: req.body.start,
         end: req.body.end,
+        priority: req.body.priority,
         objective: req.body.objective,
-        deliverable: req.body.deliverable
+        deliverable: req.body.deliverable,
+        finished: req.body.finished
     };
     await Activity.findByIdAndUpdate(id, {$set: activity}, {new: true});
     res.json({
