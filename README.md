@@ -3,23 +3,17 @@ Testing and developing the backend of the project.
 
 But "node_modules" folder is not included so you'll need to install it.
 
-### Installing
-* Intalling express
+### Installing node_modules
+To install, run the next code
 ```
-npm install express
+npm install
 ```
-* Installing nodemon
-```
-npm install nodemon -D
-```
-* Installing morgan
-```
-npm install morgan
-```
-* Installing mongoose
-```
-npm install mongoose
-```
+* Express
+* Moment.js
+* Mongoose
+* Morgan
+* Nodemon (As devDependency)
+
 ### Running the project
 After intall, use this command for run the project
 ```
