@@ -3,11 +3,12 @@ const router = express.Router();
 
 const activity = require('../controllers/activity.controller');
 
-router.get('/', activity.getActivities);
-router.post('/', activity.createActivity);
+router.get('/activity', activity.getActivities);
+router.post('/activity', activity.createActivity);
 router.post('/newproject', activity.createActivitiesForNewProject);
-router.get('/:id', activity.getActivity);
-router.put('/:id', activity.editActivity);
-router.delete('/:id', activity.deleteActivity);
+router.get('/activity/:id', activity.getActivity);
+router.put('/newproject', activity.joinNewActivitiesToNewProject);
+router.put('/activity/:id', activity.editActivity);
+router.delete('/activity/:id', activity.deleteActivity);
 
 module.exports = router;
