@@ -1,4 +1,5 @@
 const Project = require('../models/project');
+const User = require('../models/user');
 const projectCtrl = {};
 
 projectCtrl.getProjects = async (req, res) => {
@@ -7,7 +8,6 @@ projectCtrl.getProjects = async (req, res) => {
 };
 
 projectCtrl.createProject = async (req,res) => {
-    //const project = new Project(req.body);
     const project = new Project({
         name: req.body.name,
         description: req.body.description
@@ -23,6 +23,12 @@ projectCtrl.getProject = async (req, res) => {
     const project = await Project.findById(id);
     res.json(project);
 };
+
+projectCtrl.getUsersInCharge = async (req, res) => {
+    const { id } = req.params;
+    const user = await User.find({projects: id}, {projects: 0});
+    res.json(user);
+}
 
 projectCtrl.editProject = async (req, res) => {
     const { id } = req.params;
