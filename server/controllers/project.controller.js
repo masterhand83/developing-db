@@ -7,7 +7,11 @@ projectCtrl.getProjects = async (req, res) => {
 };
 
 projectCtrl.createProject = async (req,res) => {
-    const project = new Project(req.body);
+    //const project = new Project(req.body);
+    const project = new Project({
+        name: req.body.name,
+        description: req.body.description
+    });
     await project.save();
     res.json({
         status: 'Project '+project.name+' saved'
