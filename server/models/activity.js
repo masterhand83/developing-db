@@ -9,7 +9,7 @@ const ActivitySchema = new Schema({
     priority: { type: Number, required: true },
     objective: { type: String, required: false },
     deliverable: { type: String, required: false },
-    finished: { type: Boolean, required: true }
+    finished: { type: Boolean, default: false }
 });
 
 module.exports = mongoose.model('Activity', ActivitySchema);

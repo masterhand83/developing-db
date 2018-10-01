@@ -49,6 +49,15 @@ userCtrl.editUser = async (req, res) => {
     });
 };
 
+userCtrl.addProjectToUser = async (req,res) => {
+    const { id } = req.params;
+    const { _id } = req.body;
+    await User.findByIdAndUpdate(id, {$addToSet: {projects: _id}});
+    res.json({
+        status: 'Project Added to User'
+    });
+;}
+
 userCtrl.deleteUser = async (req, res) => {
     const { id } = req.params
     const { name } = await User.findById(id);
@@ -56,6 +65,13 @@ userCtrl.deleteUser = async (req, res) => {
     res.json({
         status: 'User '+name+' Deleted'
     });
+};
+
+userCtrl.login = async (req, res) => {
+    const { email } = req.body;
+    const { password } = req.body;
+    const user = await User.find({email: email, password: password});
+    res.json(user);
 };
 
 module.exports = userCtrl;

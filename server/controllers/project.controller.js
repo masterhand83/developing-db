@@ -28,7 +28,7 @@ projectCtrl.getUsersInCharge = async (req, res) => {
     const { id } = req.params;
     const user = await User.find({projects: id}, {projects: 0});
     res.json(user);
-}
+};
 
 projectCtrl.editProject = async (req, res) => {
     const { id } = req.params;

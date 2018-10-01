@@ -10,7 +10,7 @@ const ProjectSchema = new Schema({
     localReception: { type: Date, required: false },
     openingDate: { type: Date, required: false },
     furnitureDate: { type: Date, required: false },
-    activities: [{ type: Schema.Types.ObjectId, ref: "Activity", required: false }]
+    activities: [{ type: Schema.Types.ObjectId, ref: "Activity", required: false, default: [] }]
 });
 
 module.exports = mongoose.model('Project', ProjectSchema);
