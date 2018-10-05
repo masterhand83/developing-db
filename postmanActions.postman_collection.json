@@ -23,7 +23,7 @@
 							"raw": "{\n\t\"name\": \"Ryan\",\n\t\"email\": \"email1@email.com\",\n\t\"password\": \"234\",\n\t\"mobile\": 5530318080,\n\t\"userType\": 2\n}"
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/projects/id",
+							"raw": "http://localhost:3000/api/projects/project/id",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -32,6 +32,7 @@
 							"path": [
 								"api",
 								"projects",
+								"project",
 								"id"
 							]
 						},
@@ -54,7 +55,7 @@
 							"raw": "{\n\t\"name\": \"Ryan\",\n\t\"email\": \"email1@email.com\",\n\t\"password\": \"234\",\n\t\"mobile\": 5530318080,\n\t\"userType\": 2\n}"
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/projects",
+							"raw": "http://localhost:3000/api/projects/project",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -62,10 +63,35 @@
 							"port": "3000",
 							"path": [
 								"api",
-								"projects"
+								"projects",
+								"project"
 							]
 						},
 						"description": "Get all the projects"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Users in Charge",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:3000/api/projects/user/id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"projects",
+								"user",
+								"id"
+							]
+						},
+						"description": "Get all the Users in charge of that project, you need the id of the project"
 					},
 					"response": []
 				},
@@ -81,10 +107,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Project 1\",\n\t\"description\": \"First Project\",\n\t\"storeNumber\": 7,\n\t\"m2\": 100,\n\t\"location\": \"Plaza Santa Fe\",\n\t\"localReception\": \"2018-09-23T00:00:00.000Z\",\n\t\"openingDate\": \"2018-09-28T00:00:00.000Z\",\n\t\"furnitureDate\": \"2018-09-26T00:00:00.000Z\"\n}"
+							"raw": "{\n\t\"name\": \"Project 1\",\n\t\"description\": \"First Project\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/projects",
+							"raw": "http://localhost:3000/api/projects/project",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -92,7 +118,8 @@
 							"port": "3000",
 							"path": [
 								"api",
-								"projects"
+								"projects",
+								"project"
 							]
 						},
 						"description": "Add a new project"
@@ -111,10 +138,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Project 1\",\n\t\"description\": \"First Project\",\n\t\"storeNumber\": 7,\n\t\"m2\": 200,\n\t\"location\": \"Plaza Santa Fe\",\n\t\"localReception\": \"2018-09-23T00:00:00.000Z\",\n\t\"openingDate\": \"2018-09-28T00:00:00.000Z\",\n\t\"furnitureDate\": \"2018-09-26T00:00:00.000Z\"\n}"
+							"raw": "{\n\t\"name\": \"Project 1\",\n\t\"description\": \"First Project\",\n\t\"storeNumber\": 7,\n\t\"m2\": 200,\n\t\"location\": \"Plaza Santa Fe\",\n\t\"localReception\": \"2018-09-23T00:00:00.000Z\",\n\t\"openingDate\": \"2018-09-28T00:00:00.000Z\",\n\t\"furnitureDate\": \"2018-09-26T00:00:00.000Z\",\n\t\"activities\": []\n}"
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/projects/id",
+							"raw": "http://localhost:3000/api/projects/project/id",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -123,6 +150,7 @@
 							"path": [
 								"api",
 								"projects",
+								"project",
 								"id"
 							]
 						},
@@ -137,7 +165,7 @@
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "http://localhost:3000/api/projects/id",
+							"raw": "http://localhost:3000/api/projects/project/id",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -146,6 +174,7 @@
 							"path": [
 								"api",
 								"projects",
+								"project",
 								"id"
 							]
 						},
@@ -165,7 +194,7 @@
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "http://localhost:3000/api/id",
+							"raw": "http://localhost:3000/api/users/user/id",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -173,6 +202,8 @@
 							"port": "3000",
 							"path": [
 								"api",
+								"users",
+								"user",
 								"id"
 							]
 						},
@@ -187,7 +218,7 @@
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "http://localhost:3000/api/users",
+							"raw": "http://localhost:3000/api/users/user",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -195,10 +226,35 @@
 							"port": "3000",
 							"path": [
 								"api",
-								"users"
+								"users",
+								"user"
 							]
 						},
 						"description": "Get all the Users"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Projects of the User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:3000/api/users/project/id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"project",
+								"id"
+							]
+						},
+						"description": "Get the all the projects of the user with that id"
 					},
 					"response": []
 				},
@@ -214,10 +270,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"General Manager\",\n\t\"email\": \"email@email.com\",\n\t\"password\": \"123\",\n\t\"mobile\": 5530318080,\n\t\"userType\": 0,\n\t\"projects\": []\n}"
+							"raw": "{\n\t\"name\": \"General Manager\",\n\t\"email\": \"email@email.com\",\n\t\"password\": \"123\",\n\t\"mobile\": 5530318080,\n\t\"userType\": 0\n}"
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/users/",
+							"raw": "http://localhost:3000/api/users/user",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -226,7 +282,7 @@
 							"path": [
 								"api",
 								"users",
-								""
+								"user"
 							]
 						},
 						"description": "Add a new user"
@@ -245,10 +301,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"General Manager\",\n\t\"email\": \"email@email.com\",\n\t\"password\": \"123\",\n\t\"mobile\": 5530318080,\n\t\"userType\": 0,\n\t\"projects\": [\"project1\", \"project2\"]\n}"
+							"raw": "{\n\t\"email\": \"email2@email.com\",\n\t\"password\": \"1234\",\n\t\"mobile\": 55303180800\n}"
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/users/id",
+							"raw": "http://localhost:3000/api/users/user/id",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -257,6 +313,7 @@
 							"path": [
 								"api",
 								"users",
+								"user",
 								"id"
 							]
 						},
@@ -271,7 +328,7 @@
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "http://localhost:3000/api/users/id",
+							"raw": "http://localhost:3000/api/users/user/id",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -280,10 +337,259 @@
 							"path": [
 								"api",
 								"users",
+								"user",
 								"id"
 							]
 						},
 						"description": "Delete the user, you need the '_id' of the user"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Id Project To User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"_id\": \"idProject\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/project/id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"project",
+								"id"
+							]
+						},
+						"description": "Adds id project to user, you need id user an id project"
+					},
+					"response": []
+				},
+				{
+					"name": "Login User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"email@email.com\",\n\t\"password\": \"123\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						},
+						"description": "Gets the user"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Activity Actions",
+			"item": [
+				{
+					"name": "Get Activities",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:3000/api/activities/activity",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"activities",
+								"activity"
+							]
+						},
+						"description": "Gets all the activities"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Activity",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:3000/api/activities/activity/id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"activities",
+								"activity",
+								"id"
+							]
+						},
+						"description": "Get the activity with that id"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Activity",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Activity\",\n\t\"description\": \"This is optional\",\n\t\"start\": \"2018-09-29T19:25:24.293Z\",\n\t\"end\": \"2018-10-06T19:25:24.293Z\",\n\t\"priority\": 1,\n\t\"objective\": \"This is optional too\",\n\t\"deliverable\": \"And this too\",\n\t\"finished\": false\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/activities/activity",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"activities",
+								"activity"
+							]
+						},
+						"description": "Add a new activity"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Activities for New Project",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:3000/api/activities/newproject",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"activities",
+								"newproject"
+							]
+						},
+						"description": "Add activities for a new project, the activities dates are dependent from the actual date. YOU DONT NEED TO SEND ANY DATA"
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Activity",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Activity\",\n\t\"description\": \"This is optional\",\n\t\"start\": \"2018-09-29T19:25:24.293Z\",\n\t\"end\": \"2018-10-06T19:25:24.293Z\",\n\t\"priority\": 1,\n\t\"objective\": \"This is optional too\",\n\t\"deliverable\": \"And this too\",\n\t\"finished\": true\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/activities/activity/id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"activities",
+								"activity",
+								"id"
+							]
+						},
+						"description": "Edit the activity with that id"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Activity",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:3000/api/activities/activity/id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"activities",
+								"activity",
+								"id"
+							]
+						},
+						"description": "Delete the activity with that id"
+					},
+					"response": []
+				},
+				{
+					"name": "Join New Activities to New Project",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:3000/api/activities/newproject",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"activities",
+								"newproject"
+							]
+						},
+						"description": "This join the last 32 Activities to the last Project\nWARNING: Before you need to run the request \"Add Activities for New Project\""
 					},
 					"response": []
 				}

@@ -35,15 +35,16 @@ userCtrl.getUserProjects = async (req, res) => {
 
 userCtrl.editUser = async (req, res) => {
     const { id } = req.params;
-    const user = {
-        name: req.body.name,
+    const user = await User.findById(id);
+    const newUser = {
+        name: user.name,
         email: req.body.email,
         password: req.body.password,
         mobile:  req.body.mobile,
-        userType: req.body.userType,
-        projects: req.body.projects
+        userType: user.userType,
+        projects: user.projects
     };
-    await User.findByIdAndUpdate(id, {$set: user}, {new: true});
+    await User.findByIdAndUpdate(id, {$set: newUser}, {new: true});
     res.json({
         status: 'User '+user.name+' Updated'
     });
