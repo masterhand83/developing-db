@@ -10,10 +10,17 @@ userCtrl.getUsers = async (req, res) => {
 
 userCtrl.createUser = async (req,res) => {
     const user = new User(req.body);
-    await user.save();
-    res.json({
-        status: 'User '+user.name+' saved'
-    });
+    const cb = await user.save()
+        .then(function () {
+            res.json({
+                status: 'User '+user.name+' saved'
+            });
+        })
+        .catch(function () {
+            res.json({
+                status: 'Failed to save user'
+            });
+        });
 };
 
 userCtrl.getUser = async (req, res) => {
@@ -44,10 +51,17 @@ userCtrl.editUser = async (req, res) => {
         userType: user.userType,
         projects: user.projects
     };
-    await User.findByIdAndUpdate(id, {$set: newUser}, {new: true});
-    res.json({
-        status: 'User '+user.name+' Updated'
-    });
+    await User.findByIdAndUpdate(id, {$set: newUser}, {new: true})
+        .then(function () {
+            res.json({
+                status: 'User '+user.name+' Updated'
+            });
+        })
+        .catch(function () {
+            res.json({
+                status: 'Failed to update user'
+            });
+        });
 };
 
 userCtrl.addProjectToUser = async (req,res) => {
