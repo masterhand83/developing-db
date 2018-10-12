@@ -8,6 +8,20 @@ userCtrl.getUsers = async (req, res) => {
     res.json(user);
 };
 
+userCtrl.getResidents = async (req, res) => {
+    //populate().exec() es para agregar los datos de los objetos projects
+    //en populate va el nombre del dato como esta en el schema User NO EL NOMBRE DEL SCHEMA PROJECT
+    const user = await User.find({userType: 2}).populate("projects").exec();
+    res.json(user);
+};
+
+userCtrl.getDesigners = async (req, res) => {
+    //populate().exec() es para agregar los datos de los objetos projects
+    //en populate va el nombre del dato como esta en el schema User NO EL NOMBRE DEL SCHEMA PROJECT
+    const user = await User.find({userType: 3}).populate("projects").exec();
+    res.json(user);
+};
+
 userCtrl.createUser = async (req,res) => {
     const user = new User(req.body);
     const cb = await user.save()
@@ -75,11 +89,18 @@ userCtrl.addProjectToUser = async (req,res) => {
 
 userCtrl.deleteUser = async (req, res) => {
     const { id } = req.params
-    const { name } = await User.findById(id);
-    await User.findByIdAndRemove(id);
-    res.json({
-        status: 'User '+name+' Deleted'
-    });
+    const user = await User.findById(id);
+    await User.findByIdAndRemove(id)
+        .then(function () {
+            res.json({
+                status: 'User '+user.name+' Deleted'
+            });
+        })
+        .catch(function () {
+            res.json({
+                status: 'Failed to Delete User'
+            });
+        });
 };
 
 userCtrl.login = async (req, res) => {

@@ -11,5 +11,7 @@ router.post('/project/:id', user.addProjectToUser)
 router.put('/user/:id', user.editUser);
 router.delete('/user/:id', user.deleteUser);
 router.post('/login', user.login);
+router.get('/residents', user.getResidents);
+router.get('/designers', user.getDesigners);
 
 module.exports = router;
