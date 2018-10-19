@@ -57,15 +57,10 @@ userCtrl.getUserProjects = async (req, res) => {
 userCtrl.editUser = async (req, res) => {
     const { id } = req.params;
     const user = await User.findById(id);
-    const newUser = {
-        name: user.name,
-        email: req.body.email,
-        password: req.body.password,
-        mobile:  req.body.mobile,
-        userType: user.userType,
-        projects: user.projects
-    };
-    await User.findByIdAndUpdate(id, {$set: newUser}, {new: true})
+    user.email = req.body.email;
+    user.password = req.body.password;
+    user.mobile = req.body.mobile;
+    await User.findByIdAndUpdate(id, {$set: user}, {new: true})
         .then(function () {
             res.json({
                 status: 'User '+user.name+' Updated'
@@ -85,7 +80,7 @@ userCtrl.addProjectToUser = async (req,res) => {
     res.json({
         status: 'Project Added to User'
     });
-;}
+};
 
 userCtrl.deleteUser = async (req, res) => {
     const { id } = req.params

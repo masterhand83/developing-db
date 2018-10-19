@@ -30,23 +30,48 @@ projectCtrl.getUsersInCharge = async (req, res) => {
     res.json(user);
 };
 
+projectCtrl.addActivityToProject = async (req,res) => {
+    const { id } = req.params;
+    const { _id } = req.body;
+    await User.findByIdAndUpdate(id, {$addToSet: {activities: _id}});
+    res.json({
+        status: 'Activity Added to Project'
+    });
+};
+
 projectCtrl.editProject = async (req, res) => {
     const { id } = req.params;
-    const project = {
-        name: req.body.name,
-        description: req.body.description,
-        storeNumber: req.body.storeNumber,
-        m2:  req.body.m2,
-        location: req.body.location,
-        localReception: req.body.localReception,
-        openingDate: req.body.openingDate,
-        furnitureDate: req.body.furnitureDate,
-        activities: req.body.activities
-    };
-    await Project.findByIdAndUpdate(id, {$set: project}, {new: true});
+    const project = await Project.findById(id);
+    project.name = req.body.name;
+    project.description = req.body.description;
+    project.storename = req.body.storeNumber;
+    project.storeNumber = req.body.storeNumber;
+    project.m2 = req.body.m2;
+    project.location = req.body.location;
+    project.localReception = req.body.localReception;
+    project.openingDate = req.body.openingDate;
+    project.furnitureDate = req.body.furnitureDate;
+    await Project.findByIdAndUpdate(id, {$set: newProject}, {new: true});
     res.json({
-        status: 'Project '+project.name+' Updated'
+        status: 'Project '+newProject.name+' Updated'
     });
+};
+
+projectCtrl.projectAlerts = async (req, res) => {
+    const { id } = req.params;
+    const { activated } = req.body;
+    const project = await Project.findById(id);
+    project.alertsActivated = activated;
+    if (activated) {
+        res.json({
+            status: 'Project Alerts Activated'
+        });
+    }
+    else{
+        res.json({
+            status: 'Project Alerts Desactivated'
+        });
+    }
 };
 
 projectCtrl.deleteProject = async (req, res) => {
