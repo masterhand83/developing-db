@@ -24,7 +24,7 @@ userCtrl.getDesigners = async (req, res) => {
 
 userCtrl.createUser = async (req,res) => {
     const user = new User(req.body);
-    const cb = await user.save()
+    await user.save()
         .then(function () {
             res.json({
                 status: 'User '+user.name+' saved'
@@ -73,7 +73,7 @@ userCtrl.editUser = async (req, res) => {
         });
 };
 
-userCtrl.addProjectToUser = async (req,res) => {
+userCtrl.addProjectToUser = async (id) => {
     const { id } = req.params;
     const { _id } = req.body;
     await User.findByIdAndUpdate(id, {$addToSet: {projects: _id}});

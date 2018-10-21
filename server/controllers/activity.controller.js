@@ -10,19 +10,7 @@ activityCtrl.getActivities = async (req, res) => {
     res.json(activity);
 };
 
-activityCtrl.joinNewActivitiesToNewProject = async (req, res) => {
-    const activity = await Activity.find({}, {_id: 1}).sort({_id: -1}).limit(32);
-    const project = await Project.find().sort({_id: -1}).limit(1);
-    const id = project[0]._id;
-    activity.forEach(async (element) => {
-        await Project.findByIdAndUpdate(id, {$addToSet: {activities: element._id}});
-    });
-    res.json({
-        status: 'Activities Added to Project'
-    });
-};
-
-activityCtrl.createActivitiesForNewProject = async (req,res) => {
+activityCtrl.createActivitiesForNewProject = async (id) => {
     var now = moment();
     var sem1 = moment().add(1, 'w');
     var sem2 = moment().add(2, 'w');
@@ -33,6 +21,7 @@ activityCtrl.createActivitiesForNewProject = async (req,res) => {
     var sem7 = moment().add(7, 'w');
     var sem8 = moment().add(8, 'w');
     var sem10 = moment().add(10, 'w');
+    var activitiesId = new Array();
     var activities = new Array(
         new Activity({name: "LEVANTAMIENTO FISICO Y FOTOGRAFICO DEL LOCAL", start: now, end: sem1, priority: 0, finished: false}),
         new Activity({name: "PROYECTO ARQUITECTONICO", start: now, end: sem2, priority: 0, finished: false}),
@@ -69,13 +58,12 @@ activityCtrl.createActivitiesForNewProject = async (req,res) => {
     );
     activities.forEach(async (element) => {
         await element.save();
-    });
-    res.json({
-        status: 'Activities saved'
+        await Project.findByIdAndUpdate(id, {$addToSet: {activities: element._id}});
     });
 };
 
 activityCtrl.createActivity = async (req,res) => {
+    const { id } = req.params;
     const activity = new Activity(req.body);
     await activity.save();
     res.json({

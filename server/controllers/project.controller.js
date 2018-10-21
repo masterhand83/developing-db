@@ -1,6 +1,10 @@
 const Project = require('../models/project');
 const User = require('../models/user');
+const Activity = require('../models/activity');
+const activityCtrl = require('../controllers/activity.controller');
+const userCtrl = require('../controllers/user.controller');
 const projectCtrl = {};
+
 
 projectCtrl.getProjects = async (req, res) => {
     const project = await Project.find();
@@ -12,10 +16,20 @@ projectCtrl.createProject = async (req,res) => {
         name: req.body.name,
         description: req.body.description
     });
-    await project.save();
-    res.json({
-        status: 'Project '+project.name+' saved'
-    });
+    const { id1 } = req.body;
+    const { id2 } = req.body;
+    await project.save()
+        .then(function () {
+            activityCtrl.createActivitiesForNewProject(project._id);
+            res.json({
+                status: 'Project '+project.name+' saved'
+            });
+        })
+        .catch(function () {
+            res.json({
+                status: 'Project '+project.name+' failed'
+            });
+        });
 };
 
 projectCtrl.getProject = async (req, res) => {
@@ -32,8 +46,10 @@ projectCtrl.getUsersInCharge = async (req, res) => {
 
 projectCtrl.addActivityToProject = async (req,res) => {
     const { id } = req.params;
-    const { _id } = req.body;
-    await User.findByIdAndUpdate(id, {$addToSet: {activities: _id}});
+    const activity = new Activity(req.body);
+    const { _id } = activity;
+    await activity.save();
+    await Project.findByIdAndUpdate(id, {$addToSet: {activities: _id}});
     res.json({
         status: 'Activity Added to Project'
     });
@@ -44,7 +60,7 @@ projectCtrl.editProject = async (req, res) => {
     const project = await Project.findById(id);
     project.name = req.body.name;
     project.description = req.body.description;
-    project.storename = req.body.storeNumber;
+    project.storeName = req.body.storeName;
     project.storeNumber = req.body.storeNumber;
     project.m2 = req.body.m2;
     project.location = req.body.location;
