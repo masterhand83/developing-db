@@ -16,11 +16,15 @@ projectCtrl.createProject = async (req,res) => {
         name: req.body.name,
         description: req.body.description
     });
-    const { id1 } = req.body;
-    const { id2 } = req.body;
+    const { idUser1 } = req.body;
+    const { idUser2 } = req.body;
+    const { idUser3 } = req.body;
     await project.save()
         .then(function () {
             activityCtrl.createActivitiesForNewProject(project._id);
+            userCtrl.addProjectToUser(idUser1,project._id);
+            userCtrl.addProjectToUser(idUser2,project._id);
+            userCtrl.addProjectToUser(idUser3,project._id);
             res.json({
                 status: 'Project '+project.name+' saved'
             });

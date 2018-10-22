@@ -73,13 +73,8 @@ userCtrl.editUser = async (req, res) => {
         });
 };
 
-userCtrl.addProjectToUser = async (id) => {
-    const { id } = req.params;
-    const { _id } = req.body;
-    await User.findByIdAndUpdate(id, {$addToSet: {projects: _id}});
-    res.json({
-        status: 'Project Added to User'
-    });
+userCtrl.addProjectToUser = async (idUser, idProject) => {
+    await User.findByIdAndUpdate(idUser, {$addToSet: {projects: idProject}});
 };
 
 userCtrl.deleteUser = async (req, res) => {
