@@ -11,5 +11,6 @@ router.get('/project/:id', project.getProject);
 router.get('/user/:id', project.getUsersInCharge);
 router.put('/project/:id', project.editProject);
 router.delete('/project/:id', project.deleteProject);
+router.get('/activity/:id', project.getActivitiesProject);
 
 module.exports = router;

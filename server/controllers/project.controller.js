@@ -59,6 +59,17 @@ projectCtrl.addActivityToProject = async (req,res) => {
     });
 };
 
+projectCtrl.getActivitiesProject = async (req, res) => {
+    const { id } = req.params;
+    const { activities } = await Project.findById(id,{activities: -1, _id: 0}).populate('activities').exec();
+    activities.forEach(element => {
+        console.log(element);
+    });
+    res.json({
+        status: 'test'
+    });
+};
+
 projectCtrl.editProject = async (req, res) => {
     const { id } = req.params;
     const project = await Project.findById(id);
