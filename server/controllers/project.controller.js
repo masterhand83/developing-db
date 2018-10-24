@@ -62,9 +62,14 @@ projectCtrl.addActivityToProject = async (req,res) => {
 projectCtrl.getActivitiesProject = async (req, res) => {
     const { id } = req.params;
     const { activities } = await Project.findById(id,{activities: -1, _id: 0}).populate('activities').exec();
+    var GanttData = new Array();
     activities.forEach(element => {
-        console.log(element);
+        var activity = { id: element._id, name: element.name, series: [
+            { name: "", start: element.start, end: element.end, color: "#52FF33"}
+        ]};
+        GanttData.push(activity);
     });
+    console.log(GanttData);
     res.json({
         status: 'test'
     });
