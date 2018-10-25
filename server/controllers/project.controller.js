@@ -8,7 +8,10 @@ const projectCtrl = {};
 
 projectCtrl.getProjects = async (req, res) => {
     const project = await Project.find();
-    res.json(project);
+    project.forEach(async (element) => {
+        const user = await User.find({projects: element._id}, {projects: 0});
+    });
+    res.json(projectModified);
 };
 
 projectCtrl.createProject = async (req,res) => {
@@ -63,13 +66,15 @@ projectCtrl.getActivitiesProject = async (req, res) => {
     const { id } = req.params;
     const { activities } = await Project.findById(id,{activities: -1, _id: 0}).populate('activities').exec();
     var GanttData = new Array();
+    var num = 0;
     activities.forEach(element => {
-        var activity = { id: element._id, name: element.name, series: [
-            { name: "", start: element.start, end: element.end, color: "#52FF33"}
+        num++;
+        var activity = { id: element._id, name: num, series: [
+            { name: element.name, start: new Date(element.start), end: new Date(element.end), color: "#52FF33"}
         ]};
         GanttData.push(activity);
     });
-    console.log(GanttData);
+    console.log(GanttData[2]);
     res.json({
         status: 'test'
     });
