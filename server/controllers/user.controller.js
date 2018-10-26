@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const Project = require('../models/project');
 const userCtrl = {};
 
 userCtrl.getUsers = async (req, res) => {
@@ -91,6 +92,10 @@ userCtrl.deleteUser = async (req, res) => {
                 status: 'Failed to Delete User'
             });
         });
+};
+
+userCtrl.getUsersInCharge = async (data, cb) => {
+    
 };
 
 userCtrl.login = async (req, res) => {

@@ -8,10 +8,11 @@ const projectCtrl = {};
 
 projectCtrl.getProjects = async (req, res) => {
     const project = await Project.find();
-    project.forEach(async (element) => {
-        const user = await User.find({projects: element._id}, {projects: 0});
-    });
-    res.json(projectModified);
+    /*project.forEach( element => {
+        userCtrl.getUsersInCharge(element, cb => {
+        });
+    });*/
+    res.json(project);
 };
 
 projectCtrl.createProject = async (req,res) => {
@@ -43,12 +44,6 @@ projectCtrl.getProject = async (req, res) => {
     const { id } = req.params;
     const project = await Project.findById(id);
     res.json(project);
-};
-
-projectCtrl.getUsersInCharge = async (req, res) => {
-    const { id } = req.params;
-    const user = await User.find({projects: id}, {projects: 0});
-    res.json(user);
 };
 
 projectCtrl.addActivityToProject = async (req,res) => {
