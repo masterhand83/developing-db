@@ -46,6 +46,40 @@ projectCtrl.getProject = async (req, res) => {
     res.json(project);
 };
 
+projectCtrl.changeResidentInCharge = async (req, res) => {
+    const { id } = req.params;
+    const { idNewResident } = req.body;
+    await User.findOneAndUpdate({projects: id, userType: 2},{$pull: {projects: id}})
+        .then(function () {
+            userCtrl.addProjectToUser(idNewResident,id);
+            res.json({
+                status: 'Resident changed'
+            });
+        })
+        .catch(function () {
+            res.json({
+                status: 'Change Failed'
+            });
+        });
+};
+
+projectCtrl.changeDesignerInCharge = async (req, res) => {
+    const { id } = req.params;
+    const { idNewDesigner } = req.body;
+    await User.findOneAndUpdate({projects: id, userType: 3},{$pull: {projects: id}})
+        .then(function () {
+            userCtrl.addProjectToUser(idNewDesigner,id);
+            res.json({
+                status: 'Designer changed'
+            });
+        })
+        .catch(function () {
+            res.json({
+                status: 'Change Failed'
+            });
+        });
+};
+
 projectCtrl.addActivityToProject = async (req,res) => {
     const { id } = req.params;
     const activity = new Activity(req.body);

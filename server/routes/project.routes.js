@@ -3,6 +3,8 @@ const router = express.Router();
 
 const project = require('../controllers/project.controller');
 
+router.put('/resident/:id', project.changeResidentInCharge);
+router.put('/designer/:id', project.changeDesignerInCharge);
 router.put('/alert/:id', project.projectAlerts);
 router.put('/activity/:id', project.addActivityToProject);
 router.get('/project/', project.getProjects);
