@@ -1,10 +1,11 @@
 const Project = require('../models/project');
 const User = require('../models/user');
-const Activity = require('../models/activity');
 const activityCtrl = require('../controllers/activity.controller');
 const userCtrl = require('../controllers/user.controller');
 const projectCtrl = {};
 
+var moment = require('moment');
+moment().format();
 
 projectCtrl.getProjects = async (req, res) => {
     const project = await Project.find();
@@ -82,10 +83,9 @@ projectCtrl.changeDesignerInCharge = async (req, res) => {
 
 projectCtrl.addActivityToProject = async (req,res) => {
     const { id } = req.params;
-    const activity = new Activity(req.body);
-    const { _id } = activity;
-    await activity.save();
-    await Project.findByIdAndUpdate(id, {$addToSet: {activities: _id}});
+    activityCtrl.createActivity(id,req.body,async (cb) => {
+        await Project.findByIdAndUpdate(id, {$addToSet: {activities: cb}});
+    });
     res.json({
         status: 'Activity Added to Project'
     });
@@ -103,10 +103,7 @@ projectCtrl.getActivitiesProject = async (req, res) => {
         ]};
         GanttData.push(activity);
     });
-    console.log(GanttData[2]);
-    res.json({
-        status: 'test'
-    });
+    res.json(GanttData);
 };
 
 projectCtrl.editProject = async (req, res) => {
@@ -118,9 +115,9 @@ projectCtrl.editProject = async (req, res) => {
     project.storeNumber = req.body.storeNumber;
     project.m2 = req.body.m2;
     project.location = req.body.location;
-    project.localReception = req.body.localReception;
-    project.openingDate = req.body.openingDate;
-    project.furnitureDate = req.body.furnitureDate;
+    project.localReception = moment(req.body.localReception);
+    project.openingDate = moment(req.body.openingDate);
+    project.furnitureDate = moment(req.body.furnitureDate);
     await Project.findByIdAndUpdate(id, {$set: newProject}, {new: true});
     res.json({
         status: 'Project '+newProject.name+' Updated'

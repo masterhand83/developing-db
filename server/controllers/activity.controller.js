@@ -62,13 +62,14 @@ activityCtrl.createActivitiesForNewProject = async (id) => {
     });
 };
 
-activityCtrl.createActivity = async (req,res) => {
-    const { id } = req.params;
-    const activity = new Activity(req.body);
+activityCtrl.createActivity = async (id,data,cb) => {
+    var start = moment(data.start);
+    var end = moment(data.end);
+    data.start = start;
+    data.end = end;
+    const activity = new Activity(data);
     await activity.save();
-    res.json({
-        status: 'Activity '+activity.name+' saved'
-    });
+    cb(activity._id);
 };
 
 activityCtrl.getActivity = async (req, res) => {
