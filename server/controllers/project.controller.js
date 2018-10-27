@@ -109,18 +109,21 @@ projectCtrl.getActivitiesProject = async (req, res) => {
 projectCtrl.editProject = async (req, res) => {
     const { id } = req.params;
     const project = await Project.findById(id);
+    var localReception = moment(req.body.localReception);
+    var openingDate = moment(req.body.openingDate);
+    var furnitureDate = moment(req.body.furnitureDate);
     project.name = req.body.name;
     project.description = req.body.description;
     project.storeName = req.body.storeName;
     project.storeNumber = req.body.storeNumber;
     project.m2 = req.body.m2;
     project.location = req.body.location;
-    project.localReception = moment(req.body.localReception);
-    project.openingDate = moment(req.body.openingDate);
-    project.furnitureDate = moment(req.body.furnitureDate);
-    await Project.findByIdAndUpdate(id, {$set: newProject}, {new: true});
+    project.localReception = localReception;
+    project.openingDate = openingDate;
+    project.furnitureDate = furnitureDate;
+    await Project.findByIdAndUpdate(id, {$set: project}, {new: true});
     res.json({
-        status: 'Project '+newProject.name+' Updated'
+        status: 'Project '+project.name+' Updated'
     });
 };
 
