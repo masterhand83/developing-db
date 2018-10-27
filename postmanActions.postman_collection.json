@@ -20,7 +20,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Ryan\",\n\t\"email\": \"email1@email.com\",\n\t\"password\": \"234\",\n\t\"mobile\": 5530318080,\n\t\"userType\": 2\n}"
+							"raw": ""
 						},
 						"url": {
 							"raw": "http://localhost:3000/api/projects/project/idProject",
@@ -52,7 +52,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Ryan\",\n\t\"email\": \"email1@email.com\",\n\t\"password\": \"234\",\n\t\"mobile\": 5530318080,\n\t\"userType\": 2\n}"
+							"raw": ""
 						},
 						"url": {
 							"raw": "http://localhost:3000/api/projects/project",
@@ -76,7 +76,10 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "http://localhost:3000/api/projects/user/idProject",
 							"protocol": "http",
@@ -194,7 +197,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Activity\",\n\t\"description\": \"This is optional\",\n\t\"start\": \"2018-09-29T19:25:24.293Z\",\n\t\"end\": \"2018-10-06T19:25:24.293Z\",\n\t\"priority\": 1,\n\t\"objective\": \"This is optional too\",\n\t\"deliverable\": \"And this too\",\n\t\"finished\": false\n}"
+							"raw": "{\n\t\"name\": \"Activity\",\n\t\"description\": \"This is optional\",\n\t\"start\": \"2018-10-27\",\n\t\"end\": \"2018-10-27\",\n\t\"priority\": 1,\n\t\"objective\": \"This is optional too\",\n\t\"deliverable\": \"And this too\"\n}"
 						},
 						"url": {
 							"raw": "http://localhost:3000/api/projects/activity/idProject",
@@ -213,6 +216,98 @@
 						"description": "Add an activity"
 					},
 					"response": []
+				},
+				{
+					"name": "Get Activites Project",
+					"request": {
+						"method": null,
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/projects/activity/idProject",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"projects",
+								"activity",
+								"idProject"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change Designer in Charge",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"idNewDesigner\": \"id\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/projects/designer/idProject",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"projects",
+								"designer",
+								"idProject"
+							]
+						},
+						"description": "Changes the designer in charge of the project, you need the\nproject's id and the new designer's id"
+					},
+					"response": []
+				},
+				{
+					"name": "Change Resident in Charge",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"idNewResident\": \"id\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/projects/designer/idProject",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"projects",
+								"designer",
+								"idProject"
+							]
+						},
+						"description": "Changes the deigner in charge of the project, you need the\nproject's id and the new designer's id "
+					},
+					"response": []
 				}
 			]
 		},
@@ -224,7 +319,10 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "http://localhost:3000/api/users/user/idUser",
 							"protocol": "http",
@@ -248,7 +346,10 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "http://localhost:3000/api/users/user",
 							"protocol": "http",
@@ -271,7 +372,10 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "http://localhost:3000/api/users/project/idUser",
 							"protocol": "http",
@@ -418,7 +522,10 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "http://localhost:3000/api/activities/activity",
 							"protocol": "http",
@@ -441,7 +548,10 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "http://localhost:3000/api/activities/activity/id",
 							"protocol": "http",
