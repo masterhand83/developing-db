@@ -8,13 +8,13 @@ var moment = require('moment');
 moment().format();
 
 projectCtrl.getProjects = async (req, res) => {
-    const projects = await Project.find();
-    /*
-    THIS DOESN'T WORK
-    projects.forEach(element => {
-        console.log(userCtrl.getResidentInCharge(element._id));
-    });
-    */
+    const projects = await Project.find().lean();
+    var i = 0;
+    for (var item of projects) {
+        i++;
+        const { name } = await User.findOne({projects: item._id, userType: 2}).lean();
+        item.resident = name;
+    }
     res.json(projects);
 };
 

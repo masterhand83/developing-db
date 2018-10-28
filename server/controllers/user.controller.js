@@ -94,14 +94,6 @@ userCtrl.deleteUser = async (req, res) => {
         });
 };
 
-/*
-THIS DOESN'T WORK
-userCtrl.getResidentInCharge = async (id) => {
-    const { name } = await User.findOne({projects: id, userType: 2});
-    return name;
-};
-*/
-
 userCtrl.login = async (req, res) => {
     const { email } = req.body;
     const { password } = req.body;
