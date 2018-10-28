@@ -8,12 +8,14 @@ var moment = require('moment');
 moment().format();
 
 projectCtrl.getProjects = async (req, res) => {
-    const project = await Project.find();
-    /*project.forEach( element => {
-        userCtrl.getUsersInCharge(element, cb => {
-        });
-    });*/
-    res.json(project);
+    const projects = await Project.find();
+    /*
+    THIS DOESN'T WORK
+    projects.forEach(element => {
+        console.log(userCtrl.getResidentInCharge(element._id));
+    });
+    */
+    res.json(projects);
 };
 
 projectCtrl.createProject = async (req,res) => {
@@ -34,7 +36,8 @@ projectCtrl.createProject = async (req,res) => {
                 status: 'Project '+project.name+' saved'
             });
         })
-        .catch(function () {
+        .catch(function (err) {
+            console.log(err);
             res.json({
                 status: 'Project '+project.name+' failed'
             });
