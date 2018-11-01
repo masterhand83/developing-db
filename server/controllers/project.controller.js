@@ -3,6 +3,7 @@ const User = require('../models/user');
 const activityCtrl = require('../controllers/activity.controller');
 const userCtrl = require('../controllers/user.controller');
 const messageCtrl = require('../controllers/message.controller');
+const alertCtrl = require('../controllers/alert.controller');
 const projectCtrl = {};
 
 var moment = require('moment');
@@ -168,6 +169,16 @@ projectCtrl.getAlertsProject = async (req, res) => {
     const { id } = req.params;
     const project = await Project.findById(id).populate('alerts').exec();
     res.json(project);
+};
+
+projectCtrl.addAlertToProject = async (req,res) => {
+    const { id } = req.params;
+    alertCtrl.addAlert(req.body, async(cb) => {
+        await  Project.findByIdAndUpdate(id, {$addToSet: {alerts: cb}});
+    });
+    res.json({
+        status: 'Message Added to Project'
+    });
 };
 
 projectCtrl.deleteProject = async (req, res) => {

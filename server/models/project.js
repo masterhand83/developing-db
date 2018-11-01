@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
+var Alert = require('../models/alert');
 
 const ProjectSchema = new Schema({
     name: { type: String, required: true },

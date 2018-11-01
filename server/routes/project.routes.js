@@ -5,7 +5,8 @@ const project = require('../controllers/project.controller');
 
 router.put('/resident/:id', project.changeResidentInCharge);
 router.put('/designer/:id', project.changeDesignerInCharge);
-router.get('/alert/:id', project.getAlertsProject)
+router.get('/alert/:id', project.getAlertsProject);
+router.post('/alert/:id', project.addAlertToProject);
 router.put('/alert/:id', project.activateProjectAlerts);
 router.get('/message/:id',project.getMessagesProject);
 router.post('/message/:id',project.addMessageToProject);
