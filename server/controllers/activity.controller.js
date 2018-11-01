@@ -74,22 +74,21 @@ activityCtrl.createActivity = async (data,cb) => {
 
 activityCtrl.getActivity = async (req, res) => {
     const { id } = req.params;
-    const activity = await Activity.findById(id);
+    const activity = await Activity.findById(id).populate('comments').exec();
     res.json(activity);
 };
 
 activityCtrl.editActivity = async (req, res) => {
     const { id } = req.params;
-    const activity = {
-        name: req.body.name,
-        description: req.body.description,
-        start: req.body.start,
-        end: req.body.end,
-        priority: req.body.priority,
-        objective: req.body.objective,
-        deliverable: req.body.deliverable,
-        finished: req.body.finished
-    };
+    const activity = await Activity.findById(id);
+    activity.name = req.body.name,
+    activity.description = req.body.description,
+    activity.start = req.body.start,
+    activity.end = req.body.end,
+    activity.priority = req.body.priority,
+    activity.objective = req.body.objective,
+    activity.deliverable = req.body.deliverable,
+    activity.finished = req.body.finished
     await Activity.findByIdAndUpdate(id, {$set: activity}, {new: true});
     res.json({
         status: 'Activity '+activity.name+' Updated'

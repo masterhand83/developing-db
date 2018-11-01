@@ -177,7 +177,7 @@ projectCtrl.addAlertToProject = async (req,res) => {
         await  Project.findByIdAndUpdate(id, {$addToSet: {alerts: cb}});
     });
     res.json({
-        status: 'Message Added to Project'
+        status: 'Alert Added to Project'
     });
 };
 
