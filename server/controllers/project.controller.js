@@ -2,6 +2,7 @@ const Project = require('../models/project');
 const User = require('../models/user');
 const activityCtrl = require('../controllers/activity.controller');
 const userCtrl = require('../controllers/user.controller');
+const messageCtrl = require('../controllers/message.controller');
 const projectCtrl = {};
 
 var moment = require('moment');
@@ -86,7 +87,7 @@ projectCtrl.changeDesignerInCharge = async (req, res) => {
 
 projectCtrl.addActivityToProject = async (req,res) => {
     const { id } = req.params;
-    activityCtrl.createActivity(id,req.body,async (cb) => {
+    activityCtrl.createActivity(req.body,async (cb) => {
         await Project.findByIdAndUpdate(id, {$addToSet: {activities: cb}});
     });
     res.json({
@@ -130,7 +131,7 @@ projectCtrl.editProject = async (req, res) => {
     });
 };
 
-projectCtrl.projectAlerts = async (req, res) => {
+projectCtrl.activateProjectAlerts = async (req, res) => {
     const { id } = req.params;
     const { activated } = req.body;
     const project = await Project.findById(id);
@@ -145,6 +146,28 @@ projectCtrl.projectAlerts = async (req, res) => {
             status: 'Project Alerts Desactivated'
         });
     }
+};
+
+projectCtrl.addMessageToProject = async (req,res) => {
+    const { id } = req.params;
+    messageCtrl.addMessage(req.body, async(cb) => {
+        await  Project.findByIdAndUpdate(id, {$addToSet: {messages: cb}});
+    });
+    res.json({
+        status: 'Message Added to Project'
+    });
+};
+
+projectCtrl.getMessagesProject = async (req, res) => {
+    const { id } = req.params;
+    const { messages } = await Project.findById(id).populate('messages').exec();
+    res.json(messages);
+};
+
+projectCtrl.getAlertsProject = async (req, res) => {
+    const { id } = req.params;
+    const project = await Project.findById(id).populate('alerts').exec();
+    res.json(project);
 };
 
 projectCtrl.deleteProject = async (req, res) => {

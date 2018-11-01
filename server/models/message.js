@@ -7,4 +7,4 @@ const MessageSchema = new Schema({
     date: { type: Date, required: true }
 });
 
-module.exports = mongoose.model('Message', CommentSchema);
+module.exports = mongoose.model('Message', MessageSchema);

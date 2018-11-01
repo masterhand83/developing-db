@@ -62,7 +62,7 @@ activityCtrl.createActivitiesForNewProject = async (id) => {
     });
 };
 
-activityCtrl.createActivity = async (id,data,cb) => {
+activityCtrl.createActivity = async (data,cb) => {
     var start = moment(data.start);
     var end = moment(data.end);
     data.start = start;
