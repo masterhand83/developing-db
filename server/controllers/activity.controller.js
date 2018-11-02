@@ -1,5 +1,6 @@
 const Activity = require('../models/activity');
 const Project = require('../models/project');
+const commentCtrl = require('../controllers/comment.controller');
 const activityCtrl = {};
 
 var moment = require('moment');
@@ -76,6 +77,27 @@ activityCtrl.getActivity = async (req, res) => {
     const { id } = req.params;
     const activity = await Activity.findById(id).populate('comments').exec();
     res.json(activity);
+};
+
+activityCtrl.getComments = async (req, res) => {
+    const { id } = req.params;
+    const { comments } = await Activity.findById(id);
+    res.json(comments);
+}
+
+activityCtrl.addComment = async (req, res) => {
+    const { id } = req.params;
+    const { comments } = await Activity.findById(id);
+    if (comments.length < 50) {
+        commentCtrl.addComment(req.body, async(cb) => {
+            await  Activity.findByIdAndUpdate(id, {$addToSet: {comment: cb}});
+        });
+    } else {
+        res.json({
+            status: 'Comments Full'
+        });
+    }
+    res.json(comments);
 };
 
 activityCtrl.editActivity = async (req, res) => {

@@ -8,5 +8,7 @@ router.post('/activity', activity.createActivity);
 router.get('/activity/:id', activity.getActivity);
 router.put('/activity/:id', activity.editActivity);
 router.delete('/activity/:id', activity.deleteActivity);
+router.get('/comment/:id', activity.getComments);
+router.post('/comment/:id', activity.addComment);
 
 module.exports = router;

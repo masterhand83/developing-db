@@ -11,11 +11,7 @@ const ActivitySchema = new Schema({
     objective: { type: String, required: false },
     deliverable: { type: String, required: false },
     finished: { type: Boolean, default: false, required: true },
-    comments: { type: [{ type: Schema.Types.ObjectId, ref: "Comment" }], default: [], validate: [arrayLimit, '{PATH} exceeds the limit of 1'] }
+    comments: [{ type: Schema.Types.ObjectId, ref: "Comment", default: [], required: true }]
 });
-
-function arrayLimit(val) {
-    return val.length <= 1;
-  }
 
 module.exports = mongoose.model('Activity', ActivitySchema);
