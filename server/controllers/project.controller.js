@@ -137,6 +137,7 @@ projectCtrl.activateProjectAlerts = async (req, res) => {
     const { activated } = req.body;
     const project = await Project.findById(id);
     project.alertsActivated = activated;
+    await Project.findByIdAndUpdate(id, {$set: project}, {new: true});
     if (activated) {
         res.json({
             status: 'Project Alerts Activated'

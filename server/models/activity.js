@@ -8,8 +8,8 @@ const ActivitySchema = new Schema({
     start: { type: Date, required: true },
     end: { type: Date, required: true },
     priority: { type: Number, required: true },
-    objective: { type: String, required: false },
-    deliverable: { type: String, required: false },
+    objective: [{ type: String, default:[], required: true }],
+    deliverable: [{ type: String, default:[], required: true }],
     finished: { type: Boolean, default: false, required: true },
     comments: [{ type: Schema.Types.ObjectId, ref: "Comment", default: [], required: true }]
 });
