@@ -83,7 +83,7 @@ activityCtrl.getComments = async (req, res) => {
     const { id } = req.params;
     const { comments } = await Activity.findById(id);
     res.json(comments);
-}
+};
 
 activityCtrl.addComment = async (req, res) => {
     const { id } = req.params;
@@ -118,7 +118,7 @@ activityCtrl.editActivity = async (req, res) => {
 };
 
 activityCtrl.deleteActivity = async (req, res) => {
-    const { id } = req.params
+    const { id } = req.params;
     const { name } = await Activity.findById(id);
     await Activity.findByIdAndRemove(id);
     res.json({
