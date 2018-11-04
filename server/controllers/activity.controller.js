@@ -81,7 +81,7 @@ activityCtrl.getActivity = async (req, res) => {
 
 activityCtrl.getComments = async (req, res) => {
     const { id } = req.params;
-    const { comments } = await Activity.findById(id);
+    const { comments } = await Activity.findById(id).populate('comments').exec();
     res.json(comments);
 };
 
@@ -90,14 +90,16 @@ activityCtrl.addComment = async (req, res) => {
     const { comments } = await Activity.findById(id);
     if (comments.length < 50) {
         commentCtrl.addComment(req.body, async(cb) => {
-            await  Activity.findByIdAndUpdate(id, {$addToSet: {comment: cb}});
+            await  Activity.findByIdAndUpdate(id, {$addToSet: {comments: cb}});
+        });
+        res.json({
+            status: 'Comment Saved'
         });
     } else {
         res.json({
             status: 'Comments Full'
         });
     }
-    res.json(comments);
 };
 
 activityCtrl.editActivity = async (req, res) => {

@@ -166,10 +166,16 @@ projectCtrl.getMessagesProject = async (req, res) => {
     res.json(messages);
 };
 
+projectCtrl.getLast10MessagesProject = async (req, res) => {
+    const { id } = req.params;
+    const { messages } = await Project.findById(id).populate({ path: 'messages', options: { sort: { date: -1 } } }).exec();
+    res.json(messages);
+};
+
 projectCtrl.getAlertsProject = async (req, res) => {
     const { id } = req.params;
-    const project = await Project.findById(id).populate('alerts').exec();
-    res.json(project);
+    const { alerts } = await Project.findById(id).populate('alerts').exec();
+    res.json(alerts);
 };
 
 projectCtrl.addAlertToProject = async (req,res) => {

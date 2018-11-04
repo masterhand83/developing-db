@@ -9,6 +9,7 @@ router.get('/alert/:id', project.getAlertsProject);
 router.post('/alert/:id', project.addAlertToProject);
 router.put('/alert/:id', project.activateProjectAlerts);
 router.get('/message/:id',project.getMessagesProject);
+router.get('/10messages/:id',project.getLast10MessagesProject);
 router.post('/message/:id',project.addMessageToProject);
 router.put('/activity/:id', project.addActivityToProject);
 router.get('/project/', project.getProjects);
