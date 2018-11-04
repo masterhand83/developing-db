@@ -141,7 +141,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Project 1\",\n\t\"description\": \"First Project\",\n\t\"storeName\": \"Starbucks\",\n\t\"storeNumber\": 7,\n\t\"m2\": 200,\n\t\"location\": \"Plaza Santa Fe\",\n\t\"localReception\": \"2018-09-23T00:00:00.000Z\",\n\t\"openingDate\": \"2018-09-28T00:00:00.000Z\",\n\t\"furnitureDate\": \"2018-09-26T00:00:00.000Z\"\n}"
+							"raw": "{\n\t\"name\": \"Project 1\",\n\t\"description\": \"First Project\",\n\t\"storeName\": \"Starbucks\",\n\t\"storeNumber\": 7,\n\t\"m2\": 200,\n\t\"location\": \"Plaza Santa Fe\",\n\t\"localReception\": \"2018-10-01\",\n\t\"openingDate\": \"2018-10-08\",\n\t\"furnitureDate\": \"2018-10-16\"\n}"
 						},
 						"url": {
 							"raw": "http://localhost:3000/api/projects/project/idProject",
@@ -306,6 +306,126 @@
 							]
 						},
 						"description": "Changes the deigner in charge of the project, you need the\nproject's id and the new designer's id "
+					},
+					"response": []
+				},
+				{
+					"name": "Get Messages of the project",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/projects/message/idProject",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"projects",
+								"message",
+								"idProject"
+							]
+						},
+						"description": "Gets all the messages of the project "
+					},
+					"response": []
+				},
+				{
+					"name": "Send Message",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"authorName\": \"User 1\",\n\t\"message\": \"My message\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/projects/message/idProject",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"projects",
+								"message",
+								"idProject"
+							]
+						},
+						"description": "Saves the message, you dont have to put the date"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Alert to Project",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Alert\",\n\t\"description\": \"First Alert\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/projects/alert/idProject",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"projects",
+								"alert",
+								"idProject"
+							]
+						},
+						"description": "Adds an alert to project, date is not necessary"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Alerts in a Project",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/projects/alert/idProject",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"projects",
+								"alert",
+								"idProject"
+							]
+						},
+						"description": "Gets all the alerts in a project"
 					},
 					"response": []
 				}
@@ -553,7 +673,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/activities/activity/id",
+							"raw": "http://localhost:3000/api/activities/activity/idActivity",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -563,7 +683,7 @@
 								"api",
 								"activities",
 								"activity",
-								"id"
+								"idActivity"
 							]
 						},
 						"description": "Get the activity with that id"
@@ -700,6 +820,98 @@
 							]
 						},
 						"description": "This join the last 32 Activities to the last Project\nWARNING: Before you need to run the request \"Add Activities for New Project\""
+					},
+					"response": []
+				},
+				{
+					"name": "Get Comments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/activities/comment/idActivity",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"activities",
+								"comment",
+								"idActivity"
+							]
+						},
+						"description": "Gets all the comments of the activity"
+					},
+					"response": []
+				},
+				{
+					"name": "Add a comment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"authorName\": \"Username\",\n\t\"comment\": \"Comment\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/activities/comment/idActivity",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"activities",
+								"comment",
+								"idActivity"
+							]
+						},
+						"description": "Adds a comment to the activity"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Alert Actions",
+			"item": [
+				{
+					"name": "Delete Alert",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/alerts/alert/idAlert",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"alerts",
+								"alert",
+								"idAlert"
+							]
+						},
+						"description": "Deletes an alert by id"
 					},
 					"response": []
 				}
