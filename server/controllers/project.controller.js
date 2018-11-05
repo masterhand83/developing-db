@@ -11,9 +11,7 @@ moment().format();
 
 projectCtrl.getProjects = async (req, res) => {
     const projects = await Project.find().lean();
-    var i = 0;
     for (var item of projects) {
-        i++;
         const { name } = await User.findOne({projects: item._id, userType: 2}).lean();
         item.resident = name;
     }
@@ -98,13 +96,13 @@ projectCtrl.addActivityToProject = async (req,res) => {
 
 projectCtrl.getActivitiesProject = async (req, res) => {
     const { id } = req.params;
-    const { activities } = await Project.findById(id,{activities: -1, _id: 0}).populate('activities').exec();
+    const { activities } = await Project.findById(id,{activities: -1, _id: 0}).populate({ path: 'activities', options: { sort: { start: 1, end: 1 } } }).exec();
     var GanttData = new Array();
     var num = 0;
     activities.forEach(element => {
         num++;
         var activity = { id: element._id, name: num, series: [
-            { name: element.name, start: new Date(element.start), end: new Date(element.end), color: "#52FF33"}
+            { name: element.name, start: new Date(element.start), end: new Date(element.end), color: element.color}
         ]};
         GanttData.push(activity);
     });
@@ -168,7 +166,7 @@ projectCtrl.getMessagesProject = async (req, res) => {
 
 projectCtrl.getLast10MessagesProject = async (req, res) => {
     const { id } = req.params;
-    const { messages } = await Project.findById(id).populate({ path: 'messages', options: { sort: { date: -1 } } }).exec();
+    const { messages } = await Project.findById(id).populate({ path: 'messages', options: { sort: { date: -1 }, limit: 10 } }).exec();
     res.json(messages);
 };
 
@@ -190,10 +188,13 @@ projectCtrl.addAlertToProject = async (req,res) => {
 
 projectCtrl.deleteProject = async (req, res) => {
     const { id } = req.params
-    const { name } = await Project.findById(id);
+    const project = await Project.findById(id);
+    for (var item of project.activities) {
+        activityCtrl.deleteActivities(item);
+    }
     await Project.findByIdAndRemove(id);
     res.json({
-        status: 'Project '+name+' Deleted'
+        status: 'Project '+project.name+' Deleted'
     });
 };
 

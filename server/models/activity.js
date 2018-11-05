@@ -11,7 +11,8 @@ const ActivitySchema = new Schema({
     objective: [{ type: String, default:[], required: true }],
     deliverable: [{ type: String, default:[], required: true }],
     finished: { type: Boolean, default: false, required: true },
-    comments: [{ type: Schema.Types.ObjectId, ref: "Comment", default: [], required: true }]
+    comments: [{ type: Schema.Types.ObjectId, ref: "Comment", default: [], required: true }],
+    color: { type: String, default: '#000000', required: true }
 });
 
 module.exports = mongoose.model('Activity', ActivitySchema);
