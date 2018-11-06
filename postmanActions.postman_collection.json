@@ -197,7 +197,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Activity\",\n\t\"description\": \"This is optional\",\n\t\"start\": \"2018-10-27\",\n\t\"end\": \"2018-10-27\",\n\t\"priority\": 1,\n\t\"objective\": \"This is optional too\",\n\t\"deliverable\": \"And this too\"\n}"
+							"raw": "{\n\t\"name\": \"Activity\",\n\t\"description\": \"This is optional\",\n\t\"start\": \"2018-11-04\",\n\t\"end\": \"2018-11-04\",\n\t\"priority\": 1\n}"
 						},
 						"url": {
 							"raw": "http://localhost:3000/api/projects/activity/idProject",
@@ -428,6 +428,33 @@
 						"description": "Gets all the alerts in a project"
 					},
 					"response": []
+				},
+				{
+					"name": "Get las 10 messages",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/projects/10messages/idProject",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"projects",
+								"10messages",
+								"idProject"
+							]
+						},
+						"description": "Gets the last 10 messages of the project"
+					},
+					"response": []
 				}
 			]
 		},
@@ -637,32 +664,6 @@
 		{
 			"name": "Activity Actions",
 			"item": [
-				{
-					"name": "Get Activities",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/activities/activity",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"activities",
-								"activity"
-							]
-						},
-						"description": "Gets all the activities"
-					},
-					"response": []
-				},
 				{
 					"name": "Get Activity",
 					"request": {
@@ -880,6 +881,105 @@
 							]
 						},
 						"description": "Adds a comment to the activity"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Objective",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"objective\": \"First Objective\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/activities/objective/idActivity",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"activities",
+								"objective",
+								"idActivity"
+							]
+						},
+						"description": "Add an objective to the activity"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Deliverable to Activity",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"deliverable\": \"First Deliverable\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/activities/deliverable/idActivity",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"activities",
+								"deliverable",
+								"idActivity"
+							]
+						},
+						"description": "Adds a deliverable to an Activity"
+					},
+					"response": []
+				},
+				{
+					"name": "Change Priority of the activity",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"priority\": 1\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/activities/priority/idActivity",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"activities",
+								"priority",
+								"idActivity"
+							]
+						},
+						"description": "Changes the priority of the project"
 					},
 					"response": []
 				}
