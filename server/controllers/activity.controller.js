@@ -55,10 +55,6 @@ activityCtrl.createActivitiesForNewProject = async (id) => {
         await item.save();
         await Project.findByIdAndUpdate(id, {$addToSet: {activities: item._id}});
     }
-    /*activities.forEach(async (element) => {
-        await element.save();
-        await Project.findByIdAndUpdate(id, {$addToSet: {activities: element._id}});
-    });*/
 };
 
 activityCtrl.createActivity = async (data,cb) => {
@@ -69,6 +65,35 @@ activityCtrl.createActivity = async (data,cb) => {
     const activity = new Activity(data);
     await activity.save();
     cb(activity._id);
+};
+
+activityCtrl.addObjective = async (req, res) => {
+    const { id } = req.params;
+    const { objective } = req.body;
+    await Activity.findByIdAndUpdate(id, { $addToSet: { objective: objective } });
+    res.json({
+        status: 'Objective Added to Activity'
+    });
+};
+
+activityCtrl.addDeliverable = async (req, res) => {
+    const { id } = req.params;
+    const { deliverable } = req.body;
+    await Activity.findByIdAndUpdate(id, { $addToSet: { deliverable: deliverable } });
+    res.json({
+        status: 'Deliverable Added to Activity'
+    });
+};
+
+activityCtrl.editPriority = async (req, res) => {
+    const { id } = req.params;
+    const { priority } = req.body;
+    const activity = await Activity.findById(id);
+    activity.priority = priority;
+    await Activity.findByIdAndUpdate(id, {$set: activity});
+    res.json({
+        status: 'Priority changed'
+    });
 };
 
 activityCtrl.getActivity = async (req, res) => {
