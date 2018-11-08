@@ -23,6 +23,13 @@ userCtrl.getDesigners = async (req, res) => {
     res.json(user);
 };
 
+userCtrl.removeIdProject = async (id) => {
+    const user = await User.find({projects: id}, {projects: 1});
+    for (var item of user) {
+        await User.findByIdAndUpdate(item._id,{$pull: {projects: id}});
+    }
+};
+
 userCtrl.createUser = async (req,res) => {
     const user = new User(req.body);
     await user.save()

@@ -198,6 +198,7 @@ projectCtrl.deleteProject = async (req, res) => {
     for (var item of project.messages) {
         messageCtrl.deleteMessages(item);
     }
+    userCtrl.removeIdProject(id);
     await Project.findByIdAndRemove(id);
     res.json({
         status: 'Project '+project.name+' Deleted'
