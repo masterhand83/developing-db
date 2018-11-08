@@ -1,4 +1,5 @@
 const Alert = require('../models/alert');
+const Project = require('../models/project');
 const alertCtrl = {};
 
 var moment = require('moment');
@@ -14,6 +15,7 @@ alertCtrl.addAlert = async (data, cb) => {
 
 alertCtrl.deleteAlert = async (req, res) => {
     const { id } = req.params;
+    await Project.findOneAndUpdate({alerts: id}, {$pull: {alerts: id}});
     await Alert.findByIdAndDelete(id);
     res.json({
         status: 'Alert Deleted'

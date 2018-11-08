@@ -148,6 +148,7 @@ activityCtrl.deleteActivity = async (req, res) => {
     for(var item of activity.comments){
         commentCtrl.deleteComments(item);
     }
+    await Project.findOneAndUpdate({activities: id}, {$pull: {activities: id}});
     await Activity.findByIdAndRemove(id);
     res.json({
         status: 'Activity '+activity.name+' Deleted'
