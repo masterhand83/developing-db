@@ -12,4 +12,8 @@ messageCtrl.addMessage = async (data, cb) => {
     cb(message._id);
 };
 
+messageCtrl.deleteMessages = async (id) => {
+    await Message.findByIdAndDelete(id);
+};
+
 module.exports = messageCtrl;

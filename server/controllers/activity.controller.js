@@ -144,14 +144,21 @@ activityCtrl.editActivity = async (req, res) => {
 
 activityCtrl.deleteActivity = async (req, res) => {
     const { id } = req.params;
-    const { name } = await Activity.findById(id);
+    const activity = await Activity.findById(id);
+    for(var item of activity.comments){
+        commentCtrl.deleteComments(item);
+    }
     await Activity.findByIdAndRemove(id);
     res.json({
-        status: 'Activity '+name+' Deleted'
+        status: 'Activity '+activity.name+' Deleted'
     });
 };
 
 activityCtrl.deleteActivities = async (id) => {
+    const { comments } = await Activity.findById(id);
+    for(var item of comments){
+        commentCtrl.deleteComments(item);
+    }  
     await Activity.findByIdAndRemove(id);
 };
 

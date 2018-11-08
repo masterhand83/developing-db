@@ -12,4 +12,8 @@ commentCtrl.addComment = async (data, cb) => {
     cb(comment._id);
 };
 
+commentCtrl.deleteComments = async (id) => {
+    await Comment.findByIdAndDelete(id);
+};
+
 module.exports = commentCtrl;

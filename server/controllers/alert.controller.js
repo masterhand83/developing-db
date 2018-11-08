@@ -20,4 +20,8 @@ alertCtrl.deleteAlert = async (req, res) => {
     });
 };
 
+alertCtrl.deleteAlerts = async (id) => {
+    await Alert.findByIdAndRemove(id);
+};
+
 module.exports = alertCtrl;
