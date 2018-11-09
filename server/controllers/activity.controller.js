@@ -125,21 +125,25 @@ activityCtrl.addComment = async (req, res) => {
     }
 };
 
-activityCtrl.editActivity = async (req, res) => {
+activityCtrl.startActivity = async (req, res) => {
     const { id } = req.params;
     const activity = await Activity.findById(id);
-    activity.name = req.body.name,
-    activity.description = req.body.description,
-    activity.start = req.body.start,
-    activity.end = req.body.end,
-    activity.priority = req.body.priority,
-    activity.objective = req.body.objective,
-    activity.deliverable = req.body.deliverable,
-    activity.started = req.body.started,
-    activity.finished = req.body.finished
+    activity.started = true;
+    activity.color = '#040250';
     await Activity.findByIdAndUpdate(id, {$set: activity}, {new: true});
     res.json({
-        status: 'Activity '+activity.name+' Updated'
+        status: 'Activity started'
+    });
+};
+
+activityCtrl.finishActivity = async (req, res) => {
+    const { id } = req.params;
+    const activity = await Activity.findById(id);
+    activity.finished = true;
+    activity.color = '#040250';
+    await Activity.findByIdAndUpdate(id, {$set: activity}, {new: true});
+    res.json({
+        status: 'Activity finished'
     });
 };
 

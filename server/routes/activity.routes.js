@@ -4,8 +4,9 @@ const router = express.Router();
 const activity = require('../controllers/activity.controller');
 
 router.get('/activity/:id', activity.getActivity);
-router.put('/activity/:id', activity.editActivity);
 router.delete('/activity/:id', activity.deleteActivity);
+router.put('/start/:id', activity.startActivity);
+router.put('/finish/:id', activity.finishActivity);
 router.get('/comment/:id', activity.getComments);
 router.post('/comment/:id', activity.addComment);
 router.put('/objective/:id', activity.addObjective);
