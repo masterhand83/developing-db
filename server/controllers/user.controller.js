@@ -57,8 +57,11 @@ userCtrl.getUserProjects = async (req, res) => {
     const { id } = req.params;
     //populate().exec() es para agregar los datos de los objetos projects
     //en populate va el nombre del dato como esta en el schema User NO EL NOMBRE DEL SCHEMA PROJECT
-    const user = await User.findById(id).populate("projects").exec();
-    const { projects } = user;
+    const { projects } = await User.findById(id).populate("projects").exec().lean();
+    for (var item of projects) {
+        const { name } = await User.findOne({projects: item._id, userType: 2}).lean();
+        item.resident = name;
+    }
     res.json(projects);
 };
 

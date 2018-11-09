@@ -160,8 +160,14 @@ projectCtrl.addMessageToProject = async (req,res) => {
 
 projectCtrl.getMessagesProject = async (req, res) => {
     const { id } = req.params;
-    const { messages } = await Project.findById(id).populate('messages').exec();
-    res.json(messages);
+    const { messages } = await Project.findById(id).populate('messages').lean();
+    var newMessages = new Array();
+    for(const item of messages){
+        var date = moment(item.date).lang('es').format('LLLL');
+        item.date = date;
+        newMessages.push(item);
+    }
+    res.json(newMessages);
 };
 
 projectCtrl.getLast10MessagesProject = async (req, res) => {
@@ -172,8 +178,14 @@ projectCtrl.getLast10MessagesProject = async (req, res) => {
 
 projectCtrl.getAlertsProject = async (req, res) => {
     const { id } = req.params;
-    const { alerts } = await Project.findById(id).populate('alerts').exec();
-    res.json(alerts);
+    const { alerts } = await Project.findById(id).populate('alerts').lean();
+    var newAlerts = new Array();
+    for(const item of alerts){
+        var date = moment(item.date).lang('es').format('LLLL');
+        item.date = date;
+        newAlerts.push(item);
+    }
+    res.json(newAlerts);
 };
 
 projectCtrl.addAlertToProject = async (req,res) => {

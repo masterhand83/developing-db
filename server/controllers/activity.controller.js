@@ -135,6 +135,7 @@ activityCtrl.editActivity = async (req, res) => {
     activity.priority = req.body.priority,
     activity.objective = req.body.objective,
     activity.deliverable = req.body.deliverable,
+    activity.started = req.body.started,
     activity.finished = req.body.finished
     await Activity.findByIdAndUpdate(id, {$set: activity}, {new: true});
     res.json({
