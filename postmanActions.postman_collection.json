@@ -72,33 +72,6 @@
 					"response": []
 				},
 				{
-					"name": "Get Users in Charge",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/projects/user/idProject",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"projects",
-								"user",
-								"idProject"
-							]
-						},
-						"description": "Get all the Users in charge of that project, you need the id of the project"
-					},
-					"response": []
-				},
-				{
 					"name": "Add Project",
 					"request": {
 						"method": "POST",
@@ -220,7 +193,7 @@
 				{
 					"name": "Get Activites Project",
 					"request": {
-						"method": null,
+						"method": "GET",
 						"header": [],
 						"body": {
 							"mode": "raw",
@@ -980,6 +953,189 @@
 							]
 						},
 						"description": "Changes the priority of the project"
+					},
+					"response": []
+				},
+				{
+					"name": "Start Activity",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"started\": true\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/activities/start/idActivity",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"activities",
+								"start",
+								"idActivity"
+							]
+						},
+						"description": "Starts the activity with a boolean"
+					},
+					"response": []
+				},
+				{
+					"name": "Finish Activity",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/activities/finish/idActivity",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"activities",
+								"finish",
+								"idActivity"
+							]
+						},
+						"description": "Finish an activity"
+					},
+					"response": []
+				},
+				{
+					"name": "Change Start Date Activity",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"start\": \"2018-11-13\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/activities/startdate/idActivity",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"activities",
+								"startdate",
+								"idActivity"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change End Date of Activity",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"end\": \"2018-11-15\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/activities/enddate/5be4e901af62d3031b9d74b9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"activities",
+								"enddate",
+								"5be4e901af62d3031b9d74b9"
+							]
+						},
+						"description": "Changes the end dtae of the activity"
+					},
+					"response": []
+				},
+				{
+					"name": "Verify Objectives of the Activity",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/activities/verifyObjectives/idActivity",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"activities",
+								"verifyObjectives",
+								"idActivity"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify Deliverables of Activity",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/activities/verifyDeliverables/idActivity",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"activities",
+								"verifyDeliverables",
+								"idActivity"
+							]
+						}
 					},
 					"response": []
 				}
