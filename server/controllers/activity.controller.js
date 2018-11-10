@@ -70,6 +70,7 @@ activityCtrl.createActivity = async (data,cb) => {
 activityCtrl.addObjective = async (req, res) => {
     const { id } = req.params;
     const { objective } = req.body;
+    await Activity.findByIdAndUpdate(id, { $set: { objectivesVerified: false } });
     await Activity.findByIdAndUpdate(id, { $addToSet: { objective: objective } });
     res.json({
         status: 'Objective Added to Activity'
@@ -79,9 +80,26 @@ activityCtrl.addObjective = async (req, res) => {
 activityCtrl.addDeliverable = async (req, res) => {
     const { id } = req.params;
     const { deliverable } = req.body;
+    await Activity.findByIdAndUpdate(id, { $set: { deliverablesVerified: false } });
     await Activity.findByIdAndUpdate(id, { $addToSet: { deliverable: deliverable } });
     res.json({
         status: 'Deliverable Added to Activity'
+    });
+};
+
+activityCtrl.verifyObjectives = async (req, res) => {
+    const { id } = req.params;
+    await Activity.findByIdAndUpdate(id, { $set: { objectivesVerified: true } });
+    res.json({
+        status: 'Objectives Verified'
+    });
+};
+
+activityCtrl.verifyDeliverables = async (req, res) => {
+    const { id } = req.params;
+    await Activity.findByIdAndUpdate(id, { $set: { deliverablesVerified: true } });
+    res.json({
+        status: 'Deliverables Verified'
     });
 };
 
