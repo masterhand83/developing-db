@@ -7,6 +7,8 @@ router.get('/activity/:id', activity.getActivity);
 router.delete('/activity/:id', activity.deleteActivity);
 router.put('/start/:id', activity.startActivity);
 router.put('/finish/:id', activity.finishActivity);
+router.put('/startdate/:id', activity.changeStartDateActivity);
+router.put('/enddate/:id', activity.changeEndDateActivity);
 router.get('/comment/:id', activity.getComments);
 router.post('/comment/:id', activity.addComment);
 router.put('/objective/:id', activity.addObjective);

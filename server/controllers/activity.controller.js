@@ -136,6 +136,28 @@ activityCtrl.startActivity = async (req, res) => {
     });
 };
 
+activityCtrl.changeStartDateActivity = async (req, res) => {
+    const { id } = req.params;
+    const activity = await Activity.findById(id);
+    var start = moment(req.body.start);
+    activity.start = start;
+    await Activity.findByIdAndUpdate(id, {$set: activity}, {new: true});
+    res.json({
+        status: 'Start Date Changed'
+    });
+};
+
+activityCtrl.changeEndDateActivity = async (req, res) => {
+    const { id } = req.params;
+    const activity = await Activity.findById(id);
+    var end = moment(req.body.end);
+    activity.end = end;
+    await Activity.findByIdAndUpdate(id, {$set: activity}, {new: true});
+    res.json({
+        status: 'End Date Changed'
+    });
+};
+
 activityCtrl.finishActivity = async (req, res) => {
     const { id } = req.params;
     const activity = await Activity.findById(id);

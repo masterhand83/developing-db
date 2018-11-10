@@ -32,6 +32,7 @@ projectCtrl.createProject = async (req,res) => {
             userCtrl.addProjectToUser(idUser1,project._id);
             userCtrl.addProjectToUser(idUser2,project._id);
             userCtrl.addProjectToUser(idUser3,project._id);
+            alertCtrl.newProjectAlert(project._id);
             res.json({
                 status: 'Project '+project.name+' saved'
             });

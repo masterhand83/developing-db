@@ -13,6 +13,18 @@ alertCtrl.addAlert = async (data, cb) => {
     cb(alert._id);
 };
 
+alertCtrl.newProjectAlert = async (id) => {
+    var date = moment();
+    const alert = {
+        name: '¡Urgente!',
+        description: 'Proyectista, favor de completar la información general',
+        date: date
+    };
+    const newAlert = new Alert(alert);
+    await newAlert.save();
+    await Project.findByIdAndUpdate(id, {$addToSet: {alerts: newAlert._id}});
+};
+
 alertCtrl.deleteAlert = async (req, res) => {
     const { id } = req.params;
     await Project.findOneAndUpdate({alerts: id}, {$pull: {alerts: id}});
