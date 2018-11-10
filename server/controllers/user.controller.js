@@ -2,6 +2,8 @@ const User = require('../models/user');
 const Project = require('../models/project');
 const userCtrl = {};
 
+const CryptoJS = require("crypto-js");
+
 userCtrl.getUsers = async (req, res) => {
     //populate().exec() es para agregar los datos de los objetos projects
     //en populate va el nombre del dato como esta en el schema User NO EL NOMBRE DEL SCHEMA PROJECT
@@ -31,6 +33,10 @@ userCtrl.removeIdProject = async (id) => {
 };
 
 userCtrl.createUser = async (req,res) => {
+    /*var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(req.body), 'secret key 123');
+    var bytes  = CryptoJS.AES.decrypt(ciphertext.toString(), 'secret key 123');
+    var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+    console.log(decryptedData);*/
     const user = new User(req.body);
     await user.save()
         .then(function () {
@@ -43,6 +49,9 @@ userCtrl.createUser = async (req,res) => {
                 status: 'Failed to save user'
             });
         });
+    /*res.json({
+        status: 'saved'
+    });*/
 };
 
 userCtrl.getUser = async (req, res) => {
@@ -57,7 +66,7 @@ userCtrl.getUserProjects = async (req, res) => {
     const { id } = req.params;
     //populate().exec() es para agregar los datos de los objetos projects
     //en populate va el nombre del dato como esta en el schema User NO EL NOMBRE DEL SCHEMA PROJECT
-    const { projects } = await User.findById(id).populate("projects").exec().lean();
+    const { projects } = await User.findById(id).populate("projects").lean().exec();
     for (var item of projects) {
         const { name } = await User.findOne({projects: item._id, userType: 2}).lean();
         item.resident = name;
