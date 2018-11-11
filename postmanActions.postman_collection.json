@@ -516,17 +516,31 @@
 				},
 				{
 					"name": "Add User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "aca705c7-96be-4004-9988-8041818cc93f",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json"
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"General Manager\",\n\t\"email\": \"email@email.com\",\n\t\"password\": \"123\",\n\t\"mobile\": 5530318080,\n\t\"userType\": 0\n}"
+							"raw": "{\n    \"userData\": \"U2FsdGVkX186k5Mkw5vqPj3Xps6/z4xCakq9vbc8dh+ruHFmsVnem2Ds1JEW4jAdKCU20uLs+k0j5Up6XFvVm0g7cqpxNMOa/F1Ido9OrwSrGsmmzo6J1K0Noo7crEZ1k4XTZRn7z0XVkRN+8ltjDQFg5K6/UrrH5gNB4Ua80UM=\"\n}"
 						},
 						"url": {
 							"raw": "http://localhost:3000/api/users/user",
@@ -543,7 +557,78 @@
 						},
 						"description": "Add a new user"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Add User",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"General Manager\",\n    \"email\": \"email@email.com\",\n    \"password\": \"123\",\n    \"mobile\": 5530318080,\n    \"userType\": 0\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/users/user",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"users",
+										"user"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:4200"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "39"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"27-M2HO2cIYHySwjlx9vkznL3EXjr0\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Nov 2018 01:32:01 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"User General Manager saved\"\n}"
+						}
+					]
 				},
 				{
 					"name": "Edit User",
@@ -557,7 +642,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\": \"email2@email.com\",\n\t\"password\": \"1234\",\n\t\"mobile\": 55303180800\n}"
+							"raw": "{\n\t\"userData\": \"U2FsdGVkX18ss+vaozMJ1W4MpTIBUutFie3Rj7BCciHxEVQHSHxQskvH7nR3UWOSBPLKRLNfRfmVO6gIDh9YdCAUWLedUGBl75bvjZYVkS+74D44Z/zSxwKvJPI0O565\"\n}"
 						},
 						"url": {
 							"raw": "http://localhost:3000/api/users/user/idUser",
@@ -575,7 +660,77 @@
 						},
 						"description": "Edit a user, you need the '_id' of the user"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Edit User",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"email\": \"email2@email.com\",\n\t\"password\": \"1234\",\n\t\"mobile\": 55303180800\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/users/user/5be787eca8699908edae159b",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"users",
+										"user",
+										"5be787eca8699908edae159b"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:4200"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "41"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"29-X1hG9OZrz+7/AXmCxhACDh/OPM8\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Nov 2018 02:50:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"User General Manager Updated\"\n}"
+						}
+					]
 				},
 				{
 					"name": "Delete User",
@@ -613,7 +768,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\": \"email@email.com\",\n\t\"password\": \"123\"\n}"
+							"raw": "{\n\t\"userData\": \"U2FsdGVkX1+bCrmbYt1N9km//5UUD/dtGdFG7QJ/YgOWTHY4h/K7bTrU3AhG9e6/CQ6pHHtdeRuWl7xJ9lCjDw==\"\n}"
 						},
 						"url": {
 							"raw": "http://localhost:3000/api/users/login",
@@ -630,7 +785,76 @@
 						},
 						"description": "Gets the user"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Login User",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"email\": \"email@email.com\",\n\t\"password\": \"123\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/users/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"users",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:4200"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "159"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9f-Ss+tayTuwelP5z5Y33u5YhKpj0M\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 11 Nov 2018 01:55:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"projects\": [],\n        \"_id\": \"5be787eca8699908edae159b\",\n        \"name\": \"General Manager\",\n        \"email\": \"email@email.com\",\n        \"password\": \"123\",\n        \"mobile\": 5530318080,\n        \"userType\": 0,\n        \"__v\": 0\n    }\n]"
+						}
+					]
 				}
 			]
 		},
@@ -1168,6 +1392,75 @@
 							]
 						},
 						"description": "Deletes an alert by id"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Crypto Actions",
+			"item": [
+				{
+					"name": "Decrypt",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"cryptedData\": \"String of a crypted data\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/crypto/decrypt",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"crypto",
+								"decrypt"
+							]
+						},
+						"description": "Decrypts an String"
+					},
+					"response": []
+				},
+				{
+					"name": "Encrypt",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"objectField1\": \"This is an example\",\n\t\"objectField2\": \"of JSON. It could be as\",\n\t\"objectField3\": \"big possible\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/crypto/encrypt",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"crypto",
+								"encrypt"
+							]
+						},
+						"description": "Encrypts an objects and converts it to a String"
 					},
 					"response": []
 				}
