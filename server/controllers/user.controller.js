@@ -15,14 +15,26 @@ userCtrl.getResidents = async (req, res) => {
     //populate().exec() es para agregar los datos de los objetos projects
     //en populate va el nombre del dato como esta en el schema User NO EL NOMBRE DEL SCHEMA PROJECT
     const user = await User.find({userType: 2}).populate("projects").exec();
-    res.json(user);
+    var newUsers = new Array();
+    for(const item of user){
+        var cryptedData = CryptoJS.AES.encrypt(JSON.stringify(item), 'secret key 117');
+        var cryptedText = cryptedData.toString();
+        newUsers.push(cryptedText);
+    }
+    res.json(newUsers);
 };
 
 userCtrl.getDesigners = async (req, res) => {
     //populate().exec() es para agregar los datos de los objetos projects
     //en populate va el nombre del dato como esta en el schema User NO EL NOMBRE DEL SCHEMA PROJECT
     const user = await User.find({userType: 3}).populate("projects").exec();
-    res.json(user);
+    var newUsers = new Array();
+    for(const item of user){
+        var cryptedData = CryptoJS.AES.encrypt(JSON.stringify(item), 'secret key 117');
+        var cryptedText = cryptedData.toString();
+        newUsers.push(cryptedText);
+    }
+    res.json(newUsers);
 };
 
 userCtrl.removeIdProject = async (id) => {
@@ -33,11 +45,10 @@ userCtrl.removeIdProject = async (id) => {
 };
 
 userCtrl.createUser = async (req,res) => {
-    /*var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(req.body), 'secret key 123');
-    var bytes  = CryptoJS.AES.decrypt(ciphertext.toString(), 'secret key 123');
+    const { userData } = req.body;
+    var bytes = CryptoJS.AES.decrypt(userData, 'secret key 117');
     var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-    console.log(decryptedData);*/
-    const user = new User(req.body);
+    const user = new User(decryptedData);
     await user.save()
         .then(function () {
             res.json({
@@ -49,9 +60,6 @@ userCtrl.createUser = async (req,res) => {
                 status: 'Failed to save user'
             });
         });
-    /*res.json({
-        status: 'saved'
-    });*/
 };
 
 userCtrl.getUser = async (req, res) => {
@@ -59,7 +67,11 @@ userCtrl.getUser = async (req, res) => {
     //populate().exec() es para agregar los datos de los objetos projects
     //en populate va el nombre del dato como esta en el schema User NO EL NOMBRE DEL SCHEMA PROJECT
     const user = await User.findById(id).populate("projects").exec();
-    res.json(user);
+    var cryptedData = CryptoJS.AES.encrypt(JSON.stringify(user), 'secret key 117');
+    var cryptedText = cryptedData.toString();
+    res.json({
+        data: cryptedText
+    });
 };
 
 userCtrl.getUserProjects = async (req, res) => {
@@ -77,9 +89,12 @@ userCtrl.getUserProjects = async (req, res) => {
 userCtrl.editUser = async (req, res) => {
     const { id } = req.params;
     const user = await User.findById(id);
-    user.email = req.body.email;
-    user.password = req.body.password;
-    user.mobile = req.body.mobile;
+    const { userData } = req.body;
+    var bytes = CryptoJS.AES.decrypt(userData.toString(), 'secret key 117');
+    var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+    user.email = decryptedData.email;
+    user.password = decryptedData.password;
+    user.mobile = decryptedData.mobile;
     await User.findByIdAndUpdate(id, {$set: user}, {new: true})
         .then(function () {
             res.json({
@@ -114,10 +129,19 @@ userCtrl.deleteUser = async (req, res) => {
 };
 
 userCtrl.login = async (req, res) => {
-    const { email } = req.body;
-    const { password } = req.body;
+    const { userData } = req.body;
+    var bytes = CryptoJS.AES.decrypt(userData.toString(), 'secret key 117');
+    var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+    const { email } = decryptedData;
+    const { password } = decryptedData;
     const user = await User.find({email: email, password: password});
-    res.json(user);
+    var cryptedUser = new Array();
+    for(const item of user){
+        var cryptedData = CryptoJS.AES.encrypt(JSON.stringify(item), 'secret key 117');
+        var cryptedText = cryptedData.toString();
+        cryptedUser.push(cryptedText);
+    }
+    res.json(cryptedUser);
 };
 
 module.exports = userCtrl;

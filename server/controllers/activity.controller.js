@@ -147,7 +147,7 @@ activityCtrl.startActivity = async (req, res) => {
     const { id } = req.params;
     const activity = await Activity.findById(id);
     activity.started = true;
-    activity.color = '#040250';
+    activity.color = '#F0ED0E';
     await Activity.findByIdAndUpdate(id, {$set: activity}, {new: true});
     res.json({
         status: 'Activity started'
@@ -180,7 +180,7 @@ activityCtrl.finishActivity = async (req, res) => {
     const { id } = req.params;
     const activity = await Activity.findById(id);
     activity.finished = true;
-    activity.color = '#040250';
+    activity.color = '#58C423';
     await Activity.findByIdAndUpdate(id, {$set: activity}, {new: true});
     res.json({
         status: 'Activity finished'
