@@ -15,14 +15,26 @@ userCtrl.getResidents = async (req, res) => {
     //populate().exec() es para agregar los datos de los objetos projects
     //en populate va el nombre del dato como esta en el schema User NO EL NOMBRE DEL SCHEMA PROJECT
     const user = await User.find({userType: 2}).populate("projects").exec();
-    res.json(user);
+    var newUsers = new Array();
+    for(const item of user){
+        var cryptedData = CryptoJS.AES.encrypt(JSON.stringify(item), 'secret key 117');
+        var cryptedText = cryptedData.toString();
+        newUsers.push(cryptedText);
+    }
+    res.json(newUsers);
 };
 
 userCtrl.getDesigners = async (req, res) => {
     //populate().exec() es para agregar los datos de los objetos projects
     //en populate va el nombre del dato como esta en el schema User NO EL NOMBRE DEL SCHEMA PROJECT
     const user = await User.find({userType: 3}).populate("projects").exec();
-    res.json(user);
+    var newUsers = new Array();
+    for(const item of user){
+        var cryptedData = CryptoJS.AES.encrypt(JSON.stringify(item), 'secret key 117');
+        var cryptedText = cryptedData.toString();
+        newUsers.push(cryptedText);
+    }
+    res.json(newUsers);
 };
 
 userCtrl.removeIdProject = async (id) => {
