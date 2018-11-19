@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 const Comment = require('../models/comment')
 
 const ActivitySchema = new Schema({
-    name: { type: String, required: true },
+    name: { type: String, required: true, unique: true },
     description: { type: String, required: false },
     start: { type: Date, required: true },
     end: { type: Date, required: true },

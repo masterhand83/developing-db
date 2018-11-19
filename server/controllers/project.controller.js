@@ -89,9 +89,16 @@ projectCtrl.addActivityToProject = async (req,res) => {
     const { id } = req.params;
     activityCtrl.createActivity(req.body,async (cb) => {
         await Project.findByIdAndUpdate(id, {$addToSet: {activities: cb}});
-    });
-    res.json({
-        status: 'Activity Added to Project'
+    })
+    .then(()=>{
+        res.json({
+            status: 'Activity Added to Project'
+        });
+    })
+    .catch(()=>{
+        res.json({
+            status: 'Activity Failed'
+        });
     });
 };
 

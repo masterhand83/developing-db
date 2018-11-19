@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 var Alert = require('../models/alert');
 
 const ProjectSchema = new Schema({
-    name: { type: String, required: true },
+    name: { type: String, required: true, unique: true },
     description: { type: String, required: false },
     storeName: { type: String, required: false },
     storeNumber: { type: Number, required: false },
