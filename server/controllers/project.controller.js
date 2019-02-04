@@ -138,7 +138,7 @@ projectCtrl.editProject = async (req, res) => {
     });
 };
 
-projectCtrl.activateProjectAlerts = async (req, res) => {
+/*projectCtrl.activateProjectAlerts = async (req, res) => {
     const { id } = req.params;
     const { activated } = req.body;
     const project = await Project.findById(id);
@@ -154,7 +154,7 @@ projectCtrl.activateProjectAlerts = async (req, res) => {
             status: 'Project Alerts Desactivated'
         });
     }
-};
+};*/
 
 projectCtrl.addMessageToProject = async (req,res) => {
     const { id } = req.params;
@@ -182,18 +182,6 @@ projectCtrl.getLast10MessagesProject = async (req, res) => {
     const { id } = req.params;
     const { messages } = await Project.findById(id).populate({ path: 'messages', options: { sort: { date: -1 }, limit: 10 } }).exec();
     res.json(messages);
-};
-
-projectCtrl.getAlertsProject = async (req, res) => {
-    const { id } = req.params;
-    const { alerts } = await Project.findById(id).populate('alerts').lean();
-    var newAlerts = new Array();
-    for(const item of alerts){
-        var date = moment(item.date).lang('es').format('LLLL');
-        item.date = date;
-        newAlerts.push(item);
-    }
-    res.json(newAlerts);
 };
 
 projectCtrl.addAlertToProject = async (req,res) => {

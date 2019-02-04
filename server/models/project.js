@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-var Alert = require('../models/alert');
 
 const ProjectSchema = new Schema({
     name: { type: String, required: true, unique: true },
@@ -12,9 +11,7 @@ const ProjectSchema = new Schema({
     localReception: { type: Date, required: false },
     openingDate: { type: Date, required: false },
     furnitureDate: { type: Date, required: false },
-    alertsActivated: { type: Boolean, default: true, required: true },
     activities: [{ type: Schema.Types.ObjectId, ref: "Activity", default: [], required: true }],
-    alerts: [{ type: Schema.Types.ObjectId, ref: "Alert", default: [], required: true }],
     messages: [{ type: Schema.Types.ObjectId, ref: "Message", default: [], required: true }]
 });
 
