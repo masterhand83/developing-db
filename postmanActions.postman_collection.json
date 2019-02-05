@@ -355,10 +355,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Alert\",\n\t\"description\": \"First Alert\"\n}"
+							"raw": "{\n\t\"link\": \"link\",\n\t\"description\": \"First Alert\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/projects/alert/idProject",
+							"raw": "http://localhost:3000/api/projects/alert/idUser",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -368,7 +368,7 @@
 								"api",
 								"projects",
 								"alert",
-								"idProject"
+								"idUser"
 							]
 						},
 						"description": "Adds an alert to project, date is not necessary"
@@ -855,6 +855,112 @@
 							"body": "[\n    {\n        \"projects\": [],\n        \"_id\": \"5be787eca8699908edae159b\",\n        \"name\": \"General Manager\",\n        \"email\": \"email@email.com\",\n        \"password\": \"123\",\n        \"mobile\": 5530318080,\n        \"userType\": 0,\n        \"__v\": 0\n    }\n]"
 						}
 					]
+				},
+				{
+					"name": "Get Residents",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/residents",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"residents"
+							]
+						},
+						"description": "Gets all the residents"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Designers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/designers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"designers"
+							]
+						},
+						"description": "Gets all the designers"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Alert",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/alert/idAlert",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"alert",
+								"idAlert"
+							]
+						},
+						"description": "Deletes the alert by the id"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Alerts of User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/alert/idUser",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"alert",
+								"idUser"
+							]
+						},
+						"description": "Get The alerts of the user by id"
+					},
+					"response": []
 				}
 			]
 		},

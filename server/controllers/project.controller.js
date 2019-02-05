@@ -187,10 +187,10 @@ projectCtrl.getLast10MessagesProject = async (req, res) => {
 
 projectCtrl.addAlertToProject = async (req,res) => {
     const { id } = req.params;
-    const { description } = req.body;
+    const data = req.body;
     const user = await User.find({projects: id}, {projects: 1});
     for (var item of user) {
-        alertCtrl.addAlert(id, description, item._id);
+        alertCtrl.addAlert(id, data, item._id);
     }
     res.json({
         status: 'Alert Added to Project'

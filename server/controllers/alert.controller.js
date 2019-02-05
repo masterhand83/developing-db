@@ -5,14 +5,14 @@ const alertCtrl = {};
 var moment = require('moment');
 moment().format();
 
-alertCtrl.addAlert = async (id, description, userId) => {
+alertCtrl.addAlert = async (id, data, userId) => {
     var date = moment();
-    const data = {
-        link: 'link',
-        description: description,
+    const obj = {
+        link: data.link,
+        description: data.description,
         date: date
     };
-    const alert = new Alert(data);
+    const alert = new Alert(obj);
     await alert.save();
     await User.updateOne( { '_id': userId, 'alerts.projectId': id }, { $addToSet: {'alerts.$.alert': alert._id } } );
 };
