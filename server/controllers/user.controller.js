@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const Project = require('../models/project');
+const Alert = require('../models/alert');
 const userCtrl = {};
 
 const CryptoJS = require("crypto-js");
@@ -126,6 +127,21 @@ userCtrl.deleteUser = async (req, res) => {
                 status: 'Failed to Delete User'
             });
         });
+};
+
+userCtrl.getAlerts = async (req, res) => {
+    const { id } = req.params;
+    const { alerts } = await User.findById(id).populate('alerts.alert').populate('alerts.projectId', 'name');
+    res.json(alerts);
+};
+
+userCtrl.deleteAlert = async (req, res) => {
+    const { id } = req.params;
+    await User.updateOne( { 'alerts.alert': id }, { $pull: {'alerts.$.alert': id } } );
+    await Alert.findByIdAndDelete(id);
+    res.json({
+        status: 'Alert Deleted'
+    });
 };
 
 userCtrl.login = async (req, res) => {

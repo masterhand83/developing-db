@@ -26,13 +26,14 @@ projectCtrl.createProject = async (req,res) => {
     const { idUser1 } = req.body;
     const { idUser2 } = req.body;
     const { idUser3 } = req.body;
+    var users = new Array(idUser1,idUser2,idUser3);
     await project.save()
         .then(function () {
             activityCtrl.createActivitiesForNewProject(project._id);
-            userCtrl.addProjectToUser(idUser1,project._id);
-            userCtrl.addProjectToUser(idUser2,project._id);
-            userCtrl.addProjectToUser(idUser3,project._id);
-            alertCtrl.newProjectAlert(project._id);
+            for (var item of users) {
+                userCtrl.addProjectToUser(item,project._id);
+                alertCtrl.newProjectAlert(item, project._id);
+            }
             res.json({
                 status: 'Project '+project.name+' saved'
             });
@@ -186,9 +187,11 @@ projectCtrl.getLast10MessagesProject = async (req, res) => {
 
 projectCtrl.addAlertToProject = async (req,res) => {
     const { id } = req.params;
-    alertCtrl.addAlert(req.body, async(cb) => {
-        await  Project.findByIdAndUpdate(id, {$addToSet: {alerts: cb}});
-    });
+    const { description } = req.body;
+    const user = await User.find({projects: id}, {projects: 1});
+    for (var item of user) {
+        alertCtrl.addAlert(id, description, item._id);
+    }
     res.json({
         status: 'Alert Added to Project'
     });
@@ -197,17 +200,15 @@ projectCtrl.addAlertToProject = async (req,res) => {
 projectCtrl.deleteProject = async (req, res) => {
     const { id } = req.params
     const project = await Project.findById(id);
-    for (var item of project.activities) {
+    /*for (var item of project.activities) {
         activityCtrl.deleteActivities(item);
-    }
-    for (var item of project.alerts) {
-        alertCtrl.deleteAlerts(item);
     }
     for (var item of project.messages) {
         messageCtrl.deleteMessages(item);
     }
-    userCtrl.removeIdProject(id);
-    await Project.findByIdAndRemove(id);
+    userCtrl.removeIdProject(id);*/
+    alertCtrl.deleteAlerts(id);
+    //await Project.findByIdAndRemove(id);
     res.json({
         status: 'Project '+project.name+' Deleted'
     });

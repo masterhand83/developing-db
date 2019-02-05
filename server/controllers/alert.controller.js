@@ -1,41 +1,47 @@
 const Alert = require('../models/alert');
-const Project = require('../models/project');
+const User = require('../models/user');
 const alertCtrl = {};
 
 var moment = require('moment');
 moment().format();
 
-alertCtrl.addAlert = async (data, cb) => {
+alertCtrl.addAlert = async (id, description, userId) => {
     var date = moment();
-    data.date = date;
+    const data = {
+        link: 'link',
+        description: description,
+        date: date
+    };
     const alert = new Alert(data);
     await alert.save();
-    cb(alert._id);
+    await User.updateOne( { '_id': userId, 'alerts.projectId': id }, { $addToSet: {'alerts.$.alert': alert._id } } );
 };
 
-alertCtrl.newProjectAlert = async (id) => {
+alertCtrl.newProjectAlert = async (idUser, id) => {
     var date = moment();
     const alert = {
-        name: '¡Urgente!',
-        description: 'Proyectista, favor de completar la información general',
+        link: 'link',
+        description: '¡Urgente! Proyectista, favor de completar la información general',
         date: date
     };
     const newAlert = new Alert(alert);
     await newAlert.save();
-    await Project.findByIdAndUpdate(id, {$addToSet: {alerts: newAlert._id}});
-};
-
-alertCtrl.deleteAlert = async (req, res) => {
-    const { id } = req.params;
-    await Project.findOneAndUpdate({alerts: id}, {$pull: {alerts: id}});
-    await Alert.findByIdAndDelete(id);
-    res.json({
-        status: 'Alert Deleted'
-    });
+    await User.findByIdAndUpdate( idUser, { $addToSet: { alerts: { projectId: id, alert: [ newAlert._id ] } } } );
 };
 
 alertCtrl.deleteAlerts = async (id) => {
-    await Alert.findByIdAndRemove(id);
+    const users = await User.find( { 'alerts.projectId': id }, { alerts: 1 } ).lean();
+    console.log(users[0].alerts);
+    for (var array of users) {
+        var alerts = Array.from(array.alerts);
+        let obj = await alerts.find( item => {
+            return item.projectId == id;
+        });
+        for (var alert of obj.alert) {
+            await Alert.findByIdAndDelete(alert);
+        }
+        await User.updateMany( { 'alerts.projectId': id }, { $pull: { alerts: { projectId: id } } } );
+    }
 };
 
 module.exports = alertCtrl;

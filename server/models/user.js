@@ -9,7 +9,10 @@ const UserSchema = new Schema({
     mobile: { type: Number, required: true, unique: true },
     userType: { type: Number, required: true },
     projects: [{ type: Schema.Types.ObjectId, ref: "Project", required: false, default: [] }],
-    alerts: [{ type: Schema.Types.ObjectId, ref: "Alert", default: [], required: true }]
+    alerts: [{
+        projectId:{ type: Schema.Types.ObjectId, ref: "Project", required: true },
+        alert:[{ type: Schema.Types.ObjectId, ref: "Alert", default: [], required: true }]
+    }]
 });
 
 module.exports = mongoose.model('User', UserSchema);

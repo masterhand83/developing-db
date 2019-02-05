@@ -10,6 +10,8 @@ router.get('/project/:id', user.getUserProjects);
 router.put('/user/:id', user.editUser);
 router.delete('/user/:id', user.deleteUser);
 router.post('/login', user.login);
+router.get('/alert/:id', user.getAlerts);
+router.delete('/alert/:id', user.deleteAlert);
 router.get('/residents', user.getResidents);
 router.get('/designers', user.getDesigners);
 
