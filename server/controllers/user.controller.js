@@ -79,10 +79,17 @@ userCtrl.getUserProjects = async (req, res) => {
     const { id } = req.params;
     //populate().exec() es para agregar los datos de los objetos projects
     //en populate va el nombre del dato como esta en el schema User NO EL NOMBRE DEL SCHEMA PROJECT
-    const { projects } = await User.findById(id).populate("projects").lean().exec();
+    const { projects } = await User.findById(id).populate("projects", "name").lean().exec();
     for (var item of projects) {
         const { name } = await User.findOne({projects: item._id, userType: 2}).lean();
         item.resident = name;
+        const { activities } = await Project.findById(item._id).populate("activities", "finished");
+        var activitiesArray = Array.from(activities);
+        let finisheds = await activitiesArray.filter( item => {
+            return item.finished == true;
+        });
+        let progress = finisheds.length*100/activities.length;
+        item.progress = progress;
     }
     res.json(projects);
 };

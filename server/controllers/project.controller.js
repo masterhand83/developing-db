@@ -200,15 +200,15 @@ projectCtrl.addAlertToProject = async (req,res) => {
 projectCtrl.deleteProject = async (req, res) => {
     const { id } = req.params
     const project = await Project.findById(id);
-    /*for (var item of project.activities) {
+    for (var item of project.activities) {
         activityCtrl.deleteActivities(item);
     }
     for (var item of project.messages) {
         messageCtrl.deleteMessages(item);
     }
-    userCtrl.removeIdProject(id);*/
+    userCtrl.removeIdProject(id);
     alertCtrl.deleteAlerts(id);
-    //await Project.findByIdAndRemove(id);
+    await Project.findByIdAndRemove(id);
     res.json({
         status: 'Project '+project.name+' Deleted'
     });
