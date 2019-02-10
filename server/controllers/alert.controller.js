@@ -15,7 +15,7 @@ alertCtrl.addAlert = async (id, data, userId) => {
     const alert = new Alert(obj);
     await alert.save();
     await User.updateOne( { '_id': userId, 'alerts.projectId': id }, { $addToSet: {'alerts.$.alert': alert._id } } );
-};
+};//External Checked
 
 alertCtrl.newProjectAlert = async (idUser, id) => {
     var date = moment();
@@ -27,7 +27,7 @@ alertCtrl.newProjectAlert = async (idUser, id) => {
     const newAlert = new Alert(alert);
     await newAlert.save();
     await User.findByIdAndUpdate( idUser, { $addToSet: { alerts: { projectId: id, alert: [ newAlert._id ] } } } );
-};
+};//External Checked
 
 alertCtrl.deleteAlerts = async (id) => {
     const users = await User.find( { 'alerts.projectId': id }, { alerts: 1 } ).lean();
@@ -42,6 +42,6 @@ alertCtrl.deleteAlerts = async (id) => {
         }
         await User.updateMany( { 'alerts.projectId': id }, { $pull: { alerts: { projectId: id } } } );
     }
-};
+};//External Checked
 
 module.exports = alertCtrl;

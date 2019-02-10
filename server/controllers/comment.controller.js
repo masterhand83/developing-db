@@ -14,6 +14,6 @@ commentCtrl.addComment = async (data, cb) => {
 
 commentCtrl.deleteComments = async (id) => {
     await Comment.findByIdAndDelete(id);
-};
+};//External Checked
 
 module.exports = commentCtrl;

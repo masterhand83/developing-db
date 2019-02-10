@@ -16,7 +16,13 @@ projectCtrl.getProjects = async (req, res) => {
         item.resident = name;
     }
     res.json(projects);
-};
+};//Development Tool
+
+projectCtrl.getInformation = async (req, res) => {
+    const { id } = req.params;
+    const project = await Project.findById(id, { activities: 0 , messages: 0 });
+    res.json(project);
+};//Checked
 
 projectCtrl.createProject = async (req,res) => {
     const project = new Project({
@@ -44,13 +50,7 @@ projectCtrl.createProject = async (req,res) => {
                 status: 'Project '+project.name+' failed'
             });
         });
-};
-
-projectCtrl.getProject = async (req, res) => {
-    const { id } = req.params;
-    const project = await Project.findById(id);
-    res.json(project);
-};
+};//Checked
 
 projectCtrl.changeResidentInCharge = async (req, res) => {
     const { id } = req.params;
@@ -88,7 +88,7 @@ projectCtrl.changeDesignerInCharge = async (req, res) => {
 
 projectCtrl.addActivityToProject = async (req,res) => {
     const { id } = req.params;
-    activityCtrl.createActivity(req.body,async (cb) => {
+    activityCtrl.createActivity(req.body, async (cb) => {
         await Project.findByIdAndUpdate(id, {$addToSet: {activities: cb}});
     })
     .then(()=>{
@@ -101,7 +101,7 @@ projectCtrl.addActivityToProject = async (req,res) => {
             status: 'Activity Failed'
         });
     });
-};
+};//Checked
 
 projectCtrl.getActivitiesProject = async (req, res) => {
     const { id } = req.params;
@@ -110,13 +110,11 @@ projectCtrl.getActivitiesProject = async (req, res) => {
     var num = 0;
     activities.forEach(element => {
         num++;
-        var activity = { id: element._id, name: num, series: [
-            { name: element.name, start: new Date(element.start), end: new Date(element.end), color: element.color}
-        ]};
+        var activity = { id: element._id, index: num, name: element.name, start: new Date(element.start), end: new Date(element.end), color: element.color};
         GanttData.push(activity);
     });
     res.json(GanttData);
-};
+};//Checked
 
 projectCtrl.editProject = async (req, res) => {
     const { id } = req.params;
@@ -124,8 +122,6 @@ projectCtrl.editProject = async (req, res) => {
     var localReception = moment(req.body.localReception);
     var openingDate = moment(req.body.openingDate);
     var furnitureDate = moment(req.body.furnitureDate);
-    project.name = req.body.name;
-    project.description = req.body.description;
     project.storeName = req.body.storeName;
     project.storeNumber = req.body.storeNumber;
     project.m2 = req.body.m2;
@@ -137,25 +133,7 @@ projectCtrl.editProject = async (req, res) => {
     res.json({
         status: 'Project '+project.name+' Updated'
     });
-};
-
-/*projectCtrl.activateProjectAlerts = async (req, res) => {
-    const { id } = req.params;
-    const { activated } = req.body;
-    const project = await Project.findById(id);
-    project.alertsActivated = activated;
-    await Project.findByIdAndUpdate(id, {$set: project}, {new: true});
-    if (activated) {
-        res.json({
-            status: 'Project Alerts Activated'
-        });
-    }
-    else{
-        res.json({
-            status: 'Project Alerts Desactivated'
-        });
-    }
-};*/
+};//Checked
 
 projectCtrl.addMessageToProject = async (req,res) => {
     const { id } = req.params;
@@ -165,25 +143,19 @@ projectCtrl.addMessageToProject = async (req,res) => {
     res.json({
         status: 'Message Added to Project'
     });
-};
+};//Checked
 
 projectCtrl.getMessagesProject = async (req, res) => {
     const { id } = req.params;
     const { messages } = await Project.findById(id).populate('messages').lean();
     var newMessages = new Array();
     for(const item of messages){
-        var date = moment(item.date).lang('es').format('LLLL');
+        var date = moment(item.date).locale('es').format('LLLL');
         item.date = date;
         newMessages.push(item);
     }
     res.json(newMessages);
-};
-
-projectCtrl.getLast10MessagesProject = async (req, res) => {
-    const { id } = req.params;
-    const { messages } = await Project.findById(id).populate({ path: 'messages', options: { sort: { date: -1 }, limit: 10 } }).exec();
-    res.json(messages);
-};
+};//Checked
 
 projectCtrl.addAlertToProject = async (req,res) => {
     const { id } = req.params;
@@ -195,7 +167,7 @@ projectCtrl.addAlertToProject = async (req,res) => {
     res.json({
         status: 'Alert Added to Project'
     });
-};
+};//Checked
 
 projectCtrl.deleteProject = async (req, res) => {
     const { id } = req.params
@@ -212,6 +184,6 @@ projectCtrl.deleteProject = async (req, res) => {
     res.json({
         status: 'Project '+project.name+' Deleted'
     });
-};
+};//Checked
 
 module.exports = projectCtrl;

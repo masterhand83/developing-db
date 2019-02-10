@@ -5,17 +5,15 @@ const project = require('../controllers/project.controller');
 
 router.put('/resident/:id', project.changeResidentInCharge);
 router.put('/designer/:id', project.changeDesignerInCharge);
-router.post('/alert/:id', project.addAlertToProject);
-//router.put('/alert/:id', project.activateProjectAlerts);
-router.get('/message/:id',project.getMessagesProject);
-router.get('/10messages/:id',project.getLast10MessagesProject);
-router.post('/message/:id',project.addMessageToProject);
-router.put('/activity/:id', project.addActivityToProject);
-router.get('/project/', project.getProjects);
-router.post('/project/', project.createProject);
-router.get('/project/:id', project.getProject);
-router.put('/project/:id', project.editProject);
-router.delete('/project/:id', project.deleteProject);
-router.get('/activity/:id', project.getActivitiesProject);
+router.post('/alert/:id', project.addAlertToProject);//Checked
+router.get('/info/:id', project.getInformation);//Checked
+router.get('/message/:id',project.getMessagesProject);//Checked
+router.post('/message/:id',project.addMessageToProject);//Checked
+router.put('/activity/:id', project.addActivityToProject);//Checked
+router.get('/project/', project.getProjects);//Development Tool
+router.post('/project/', project.createProject);//Checked
+router.put('/project/:id', project.editProject);//Checked
+router.delete('/project/:id', project.deleteProject);//Checked
+router.get('/activity/:id', project.getActivitiesProject);//Checked
 
 module.exports = router;

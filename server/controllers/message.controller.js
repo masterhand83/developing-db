@@ -10,10 +10,10 @@ messageCtrl.addMessage = async (data, cb) => {
     const message = new Message(data);
     await message.save();
     cb(message._id);
-};
+};//External Checked
 
 messageCtrl.deleteMessages = async (id) => {
     await Message.findByIdAndDelete(id);
-};
+};//External Checked
 
 module.exports = messageCtrl;

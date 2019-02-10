@@ -55,7 +55,7 @@ activityCtrl.createActivitiesForNewProject = async (id) => {
         await item.save();
         await Project.findByIdAndUpdate(id, {$addToSet: {activities: item._id}});
     }
-};
+};//External Checked
 
 activityCtrl.createActivity = async (data,cb) => {
     var start = moment(data.start);
@@ -65,7 +65,7 @@ activityCtrl.createActivity = async (data,cb) => {
     const activity = new Activity(data);
     await activity.save();
     cb(activity._id);
-};
+};//External Checked
 
 activityCtrl.addObjective = async (req, res) => {
     const { id } = req.params;
@@ -206,6 +206,6 @@ activityCtrl.deleteActivities = async (id) => {
         commentCtrl.deleteComments(item);
     }  
     await Activity.findByIdAndRemove(id);
-};
+};//External Checked
 
 module.exports = activityCtrl;

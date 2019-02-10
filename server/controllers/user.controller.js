@@ -10,12 +10,10 @@ userCtrl.getUsers = async (req, res) => {
     //en populate va el nombre del dato como esta en el schema User NO EL NOMBRE DEL SCHEMA PROJECT
     const user = await User.find().populate('projects').exec();
     res.json(user);
-};
+};//Development Tool
 
 userCtrl.getResidents = async (req, res) => {
-    //populate().exec() es para agregar los datos de los objetos projects
-    //en populate va el nombre del dato como esta en el schema User NO EL NOMBRE DEL SCHEMA PROJECT
-    const user = await User.find({userType: 2}).populate("projects").exec();
+    const user = await User.find({userType: 2}, {name: 1});
     var newUsers = new Array();
     for(const item of user){
         var cryptedData = CryptoJS.AES.encrypt(JSON.stringify(item), 'secret key 117');
@@ -23,12 +21,10 @@ userCtrl.getResidents = async (req, res) => {
         newUsers.push(cryptedText);
     }
     res.json(newUsers);
-};
+};//Checked
 
 userCtrl.getDesigners = async (req, res) => {
-    //populate().exec() es para agregar los datos de los objetos projects
-    //en populate va el nombre del dato como esta en el schema User NO EL NOMBRE DEL SCHEMA PROJECT
-    const user = await User.find({userType: 3}).populate("projects").exec();
+    const user = await User.find({userType: 3}, {name: 1});
     var newUsers = new Array();
     for(const item of user){
         var cryptedData = CryptoJS.AES.encrypt(JSON.stringify(item), 'secret key 117');
@@ -36,14 +32,14 @@ userCtrl.getDesigners = async (req, res) => {
         newUsers.push(cryptedText);
     }
     res.json(newUsers);
-};
+};//Checked
 
 userCtrl.removeIdProject = async (id) => {
     const user = await User.find({projects: id}, {projects: 1});
     for (var item of user) {
         await User.findByIdAndUpdate(item._id,{$pull: {projects: id}});
     }
-};
+};//External Checked
 
 userCtrl.createUser = async (req,res) => {
     const { userData } = req.body;
@@ -61,24 +57,29 @@ userCtrl.createUser = async (req,res) => {
                 status: 'Failed to save user'
             });
         });
-};
+};//Checked
 
 userCtrl.getUser = async (req, res) => {
     const { id } = req.params;
-    //populate().exec() es para agregar los datos de los objetos projects
-    //en populate va el nombre del dato como esta en el schema User NO EL NOMBRE DEL SCHEMA PROJECT
-    const user = await User.findById(id).populate("projects").exec();
+    const user = await User.findById(id, { alerts: 0}).populate("projects", "name").exec();
     var cryptedData = CryptoJS.AES.encrypt(JSON.stringify(user), 'secret key 117');
     var cryptedText = cryptedData.toString();
     res.json({
         data: cryptedText
     });
-};
+};//Checked
+
+userCtrl.viewUsers = async (req, res) => {
+    const user = await User.find({ userType: { $nin: [ 0, 1 ] } }, {name: 1});
+    var cryptedData = CryptoJS.AES.encrypt(JSON.stringify(user), 'secret key 117');
+    var cryptedText = cryptedData.toString();
+    res.json({
+        data: cryptedText
+    });
+};//Checked
 
 userCtrl.getUserProjects = async (req, res) => {
     const { id } = req.params;
-    //populate().exec() es para agregar los datos de los objetos projects
-    //en populate va el nombre del dato como esta en el schema User NO EL NOMBRE DEL SCHEMA PROJECT
     const { projects } = await User.findById(id).populate("projects", "name").lean().exec();
     for (var item of projects) {
         const { name } = await User.findOne({projects: item._id, userType: 2}).lean();
@@ -92,7 +93,7 @@ userCtrl.getUserProjects = async (req, res) => {
         item.progress = progress;
     }
     res.json(projects);
-};
+};//Checked
 
 userCtrl.editUser = async (req, res) => {
     const { id } = req.params;
@@ -100,6 +101,7 @@ userCtrl.editUser = async (req, res) => {
     const { userData } = req.body;
     var bytes = CryptoJS.AES.decrypt(userData.toString(), 'secret key 117');
     var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+    user.name = decryptedData.name;
     user.email = decryptedData.email;
     user.password = decryptedData.password;
     user.mobile = decryptedData.mobile;
@@ -114,11 +116,11 @@ userCtrl.editUser = async (req, res) => {
                 status: 'Failed to update user'
             });
         });
-};
+};//Checked
 
 userCtrl.addProjectToUser = async (idUser, idProject) => {
     await User.findByIdAndUpdate(idUser, {$addToSet: {projects: idProject}});
-};
+};//External Checked
 
 userCtrl.deleteUser = async (req, res) => {
     const { id } = req.params
@@ -140,7 +142,7 @@ userCtrl.getAlerts = async (req, res) => {
     const { id } = req.params;
     const { alerts } = await User.findById(id).populate('alerts.alert').populate('alerts.projectId', 'name');
     res.json(alerts);
-};
+};//Checked
 
 userCtrl.deleteAlert = async (req, res) => {
     const { id } = req.params;
@@ -149,7 +151,7 @@ userCtrl.deleteAlert = async (req, res) => {
     res.json({
         status: 'Alert Deleted'
     });
-};
+};//Checked
 
 userCtrl.login = async (req, res) => {
     const { userData } = req.body;
@@ -157,7 +159,7 @@ userCtrl.login = async (req, res) => {
     var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
     const { email } = decryptedData;
     const { password } = decryptedData;
-    const user = await User.find({email: email, password: password});
+    const user = await User.find({ email: email, password: password }, { _id: 1 });
     var cryptedUser = new Array();
     for(const item of user){
         var cryptedData = CryptoJS.AES.encrypt(JSON.stringify(item), 'secret key 117');
@@ -165,6 +167,6 @@ userCtrl.login = async (req, res) => {
         cryptedUser.push(cryptedText);
     }
     res.json(cryptedUser);
-};
+};//Checked
 
 module.exports = userCtrl;

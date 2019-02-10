@@ -8,13 +8,13 @@ cryptoCtrl.encrypt = async (req, res) => {
     res.json({
         cryptedData: cryptedText
     });
-};
+};//Development Tool
 
 cryptoCtrl.decrypt = async (req, res) => {
     const { cryptedData } = req.body;
     var bytes = CryptoJS.AES.decrypt(cryptedData.toString(), 'secret key 117');
     var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
     res.json(decryptedData);
-};
+};//Development Tool
 
 module.exports = cryptoCtrl;
