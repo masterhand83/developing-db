@@ -15,5 +15,7 @@ router.post('/project/', project.createProject);//Checked
 router.put('/project/:id', project.editProject);//Checked
 router.delete('/project/:id', project.deleteProject);//Checked
 router.get('/activity/:id', project.getActivitiesProject);//Checked
+router.get('/file/:id', project.getFilesProject);//Checked
+router.post('/file/:id', project.addFileToProject);//Checked
 
 module.exports = router;

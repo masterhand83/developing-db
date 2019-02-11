@@ -159,7 +159,7 @@ userCtrl.login = async (req, res) => {
     var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
     const { email } = decryptedData;
     const { password } = decryptedData;
-    const user = await User.find({ email: email, password: password }, { _id: 1 });
+    const user = await User.find({ email: email, password: password }, { userType: 1 });
     var cryptedUser = new Array();
     for(const item of user){
         var cryptedData = CryptoJS.AES.encrypt(JSON.stringify(item), 'secret key 117');

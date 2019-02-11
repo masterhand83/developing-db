@@ -4,6 +4,7 @@ const activityCtrl = require('../controllers/activity.controller');
 const userCtrl = require('../controllers/user.controller');
 const messageCtrl = require('../controllers/message.controller');
 const alertCtrl = require('../controllers/alert.controller');
+const fileCtrl = require('../controllers/file.controller');
 const projectCtrl = {};
 
 var moment = require('moment');
@@ -86,7 +87,38 @@ projectCtrl.changeDesignerInCharge = async (req, res) => {
         });
 };
 
-projectCtrl.addActivityToProject = async (req,res) => {
+projectCtrl.getFilesProject = async (req, res) => {
+    const { id } = req.params;
+    const { files } = await Project.findById(id).populate('files', 'author originalname icon size created_at');
+    res.json(files);
+};//Checked
+
+projectCtrl.addFileToProject = async (req, res) => {
+    const { id } = req.params;
+    await Project.findById(id)
+        .then((project) => {
+            if(project === null){
+                res.json({
+                    status: 'Fail to Add File 1'
+                });
+            }
+            else{
+                fileCtrl.uploadFile(req, async (cb) => {
+                    await Project.findByIdAndUpdate(id, {$addToSet: {files: cb}})
+                });
+                res.json({
+                    status: 'File Added to Project'
+                });
+            }
+        })
+        .catch(() => {
+            res.json({
+                status: 'Fail to Add File 2'
+            });
+        });
+};//Checked
+
+projectCtrl.addActivityToProject = async (req, res) => {
     const { id } = req.params;
     activityCtrl.createActivity(req.body, async (cb) => {
         await Project.findByIdAndUpdate(id, {$addToSet: {activities: cb}});
@@ -177,6 +209,9 @@ projectCtrl.deleteProject = async (req, res) => {
     }
     for (var item of project.messages) {
         messageCtrl.deleteMessages(item);
+    }
+    for (var item of project.files) {
+        fileCtrl.deleteFiles(item);
     }
     userCtrl.removeIdProject(id);
     alertCtrl.deleteAlerts(id);

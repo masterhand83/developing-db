@@ -12,7 +12,8 @@ const ProjectSchema = new Schema({
     openingDate: { type: Date, required: false },
     furnitureDate: { type: Date, required: false },
     activities: [{ type: Schema.Types.ObjectId, ref: "Activity", default: [], required: true }],
-    messages: [{ type: Schema.Types.ObjectId, ref: "Message", default: [], required: true }]
+    messages: [{ type: Schema.Types.ObjectId, ref: "Message", default: [], required: true }],
+    files: [{ type: Schema.Types.ObjectId, ref: "File", default: [], required: true }]
 });
 
 module.exports = mongoose.model('Project', ProjectSchema);
