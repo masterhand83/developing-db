@@ -9,38 +9,6 @@
 			"name": "Project Actions",
 			"item": [
 				{
-					"name": "Get Project",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/projects/project/idProject",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"projects",
-								"project",
-								"idProject"
-							]
-						},
-						"description": "Get the project with that id"
-					},
-					"response": []
-				},
-				{
 					"name": "Get Projects",
 					"request": {
 						"method": "GET",
@@ -67,7 +35,7 @@
 								"project"
 							]
 						},
-						"description": "Get all the projects"
+						"description": "Develepment Tool"
 					},
 					"response": []
 				},
@@ -98,7 +66,7 @@
 								"project"
 							]
 						},
-						"description": "Add a new project with its default activities"
+						"description": "Checked"
 					},
 					"response": []
 				},
@@ -114,7 +82,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Project 1\",\n\t\"description\": \"First Project\",\n\t\"storeName\": \"Starbucks\",\n\t\"storeNumber\": 7,\n\t\"m2\": 200,\n\t\"location\": \"Plaza Santa Fe\",\n\t\"localReception\": \"2018-10-01\",\n\t\"openingDate\": \"2018-10-08\",\n\t\"furnitureDate\": \"2018-10-16\"\n}"
+							"raw": "{\n\t\"storeName\": \"Starbucks\",\n\t\"storeNumber\": 7,\n\t\"m2\": 200,\n\t\"location\": \"Plaza Santa Fe\",\n\t\"localReception\": \"2018-10-01\",\n\t\"openingDate\": \"2018-10-08\",\n\t\"furnitureDate\": \"2018-10-16\"\n}"
 						},
 						"url": {
 							"raw": "http://localhost:3000/api/projects/project/idProject",
@@ -130,7 +98,7 @@
 								"idProject"
 							]
 						},
-						"description": "Edit a project, you need the '_id' of the project"
+						"description": "Checked"
 					},
 					"response": []
 				},
@@ -154,7 +122,7 @@
 								"idProject"
 							]
 						},
-						"description": "Delete the project, you need the '_id' of the project"
+						"description": "Checked"
 					},
 					"response": []
 				},
@@ -170,7 +138,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Activity\",\n\t\"description\": \"This is optional\",\n\t\"start\": \"2018-11-04\",\n\t\"end\": \"2018-11-04\",\n\t\"priority\": 1\n}"
+							"raw": "{\n\t\"name\": \"Activity\",\n\t\"description\": \"This is optional\",\n\t\"start\": \"2018-11-04\",\n\t\"end\": \"2018-11-04\",\n\t\"priority\": 1,\n\t\"deliverable\": [\"FirstDeliverable\", \"SecondDeliverable\", \"ThirdDeliverable\"],\n\t\"objective\": [\"FirstObjective\", \"SecondObjective\"]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:3000/api/projects/activity/idProject",
@@ -212,7 +180,8 @@
 								"activity",
 								"idProject"
 							]
-						}
+						},
+						"description": "Checked"
 					},
 					"response": []
 				},
@@ -305,7 +274,7 @@
 								"idProject"
 							]
 						},
-						"description": "Gets all the messages of the project "
+						"description": "Checked"
 					},
 					"response": []
 				},
@@ -338,7 +307,7 @@
 								"idProject"
 							]
 						},
-						"description": "Saves the message, you dont have to put the date"
+						"description": "Checked"
 					},
 					"response": []
 				},
@@ -358,33 +327,6 @@
 							"raw": "{\n\t\"link\": \"link\",\n\t\"description\": \"First Alert\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/projects/alert/idUser",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"projects",
-								"alert",
-								"idUser"
-							]
-						},
-						"description": "Adds an alert to project, date is not necessary"
-					},
-					"response": []
-				},
-				{
-					"name": "Get Alerts in a Project",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
 							"raw": "http://localhost:3000/api/projects/alert/idProject",
 							"protocol": "http",
 							"host": [
@@ -398,12 +340,12 @@
 								"idProject"
 							]
 						},
-						"description": "Gets all the alerts in a project"
+						"description": "Checked"
 					},
 					"response": []
 				},
 				{
-					"name": "Get las 10 messages",
+					"name": "Get Information of the Project",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -412,7 +354,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/projects/10messages/idProject",
+							"raw": "http://localhost:3000/api/projects/info/idProject",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -421,11 +363,87 @@
 							"path": [
 								"api",
 								"projects",
-								"10messages",
+								"info",
 								"idProject"
 							]
 						},
-						"description": "Gets the last 10 messages of the project"
+						"description": "Checked"
+					},
+					"response": []
+				},
+				{
+					"name": "Add File to Project",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "author",
+									"value": "Resident",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": ""
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/projects/file/idProject",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"projects",
+								"file",
+								"idProject"
+							]
+						},
+						"description": "Checked"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Files Project",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/projects/file/idProject",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"projects",
+								"file",
+								"idProject"
+							]
+						},
+						"description": "Checked"
 					},
 					"response": []
 				}
@@ -457,7 +475,7 @@
 								"idUser"
 							]
 						},
-						"description": "Get the user with that id"
+						"description": "Checked"
 					},
 					"response": []
 				},
@@ -483,7 +501,7 @@
 								"user"
 							]
 						},
-						"description": "Get all the Users"
+						"description": "Development Tool"
 					},
 					"response": []
 				},
@@ -555,7 +573,7 @@
 								"user"
 							]
 						},
-						"description": "Add a new user"
+						"description": "Checked"
 					},
 					"response": [
 						{
@@ -658,7 +676,7 @@
 								"idUser"
 							]
 						},
-						"description": "Edit a user, you need the '_id' of the user"
+						"description": "Checked"
 					},
 					"response": [
 						{
@@ -673,7 +691,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"email\": \"email2@email.com\",\n\t\"password\": \"1234\",\n\t\"mobile\": 55303180800\n}"
+									"raw": "{\n\t\"name\": \"ManagerChanged\",\n\t\"email\": \"email2@email.com\",\n\t\"password\": \"1234\",\n\t\"mobile\": 5530318080\n}"
 								},
 								"url": {
 									"raw": "http://localhost:3000/api/users/user/5be787eca8699908edae159b",
@@ -783,7 +801,7 @@
 								"login"
 							]
 						},
-						"description": "Gets the user"
+						"description": "Checked"
 					},
 					"response": [
 						{
@@ -878,7 +896,7 @@
 								"residents"
 							]
 						},
-						"description": "Gets all the residents"
+						"description": "Checked"
 					},
 					"response": []
 				},
@@ -904,7 +922,7 @@
 								"designers"
 							]
 						},
-						"description": "Gets all the designers"
+						"description": "Checked"
 					},
 					"response": []
 				},
@@ -931,7 +949,7 @@
 								"idAlert"
 							]
 						},
-						"description": "Deletes the alert by the id"
+						"description": "Checked"
 					},
 					"response": []
 				},
@@ -958,7 +976,33 @@
 								"idUser"
 							]
 						},
-						"description": "Get The alerts of the user by id"
+						"description": "Checked"
+					},
+					"response": []
+				},
+				{
+					"name": "View Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"users"
+							]
+						},
+						"description": "Checked (Change to /user)"
 					},
 					"response": []
 				}
@@ -1472,10 +1516,37 @@
 			]
 		},
 		{
-			"name": "Alert Actions",
+			"name": "File Actions",
 			"item": [
 				{
-					"name": "Delete Alert",
+					"name": "Download File",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/files/file/idFile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"files",
+								"file",
+								"idFile"
+							]
+						},
+						"description": "Checked"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete File",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -1484,7 +1555,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/alerts/alert/idAlert",
+							"raw": "http://localhost:3000/api/files/file/idFile",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1492,12 +1563,39 @@
 							"port": "3000",
 							"path": [
 								"api",
-								"alerts",
-								"alert",
-								"idAlert"
+								"files",
+								"file",
+								"idFile"
 							]
 						},
-						"description": "Deletes an alert by id"
+						"description": "Checked"
+					},
+					"response": []
+				},
+				{
+					"name": "Download Report",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/pdfs/pdf/idProject",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"pdfs",
+								"pdf",
+								"idProject"
+							]
+						},
+						"description": "Checked"
 					},
 					"response": []
 				}
@@ -1534,7 +1632,7 @@
 								"decrypt"
 							]
 						},
-						"description": "Decrypts an String"
+						"description": "Development Tool"
 					},
 					"response": []
 				},
@@ -1566,7 +1664,7 @@
 								"encrypt"
 							]
 						},
-						"description": "Encrypts an objects and converts it to a String"
+						"description": "Development Tool"
 					},
 					"response": []
 				}
