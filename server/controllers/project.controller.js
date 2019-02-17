@@ -21,7 +21,7 @@ projectCtrl.getProjects = async (req, res) => {
 
 projectCtrl.getInformation = async (req, res) => {
     const { id } = req.params;
-    const project = await Project.findById(id, { activities: 0 , messages: 0 });
+    const project = await Project.findById(id, { activities: 0 , messages: 0, files: 0 });
     res.json(project);
 };//Checked
 
@@ -59,6 +59,7 @@ projectCtrl.changeResidentInCharge = async (req, res) => {
     await User.findOneAndUpdate({projects: id, userType: 2},{$pull: {projects: id}})
         .then(function () {
             userCtrl.addProjectToUser(idNewResident,id);
+            alertCtrl.deleteUserAlerts(id, idNewResident);
             res.json({
                 status: 'Resident changed'
             });
@@ -68,7 +69,7 @@ projectCtrl.changeResidentInCharge = async (req, res) => {
                 status: 'Change Failed'
             });
         });
-};
+};//Checked
 
 projectCtrl.changeDesignerInCharge = async (req, res) => {
     const { id } = req.params;
@@ -76,6 +77,7 @@ projectCtrl.changeDesignerInCharge = async (req, res) => {
     await User.findOneAndUpdate({projects: id, userType: 3},{$pull: {projects: id}})
         .then(function () {
             userCtrl.addProjectToUser(idNewDesigner,id);
+            alertCtrl.deleteUserAlerts(id, idNewDesigner);
             res.json({
                 status: 'Designer changed'
             });
@@ -85,7 +87,7 @@ projectCtrl.changeDesignerInCharge = async (req, res) => {
                 status: 'Change Failed'
             });
         });
-};
+};//Checked
 
 projectCtrl.getFilesProject = async (req, res) => {
     const { id } = req.params;
@@ -120,17 +122,25 @@ projectCtrl.addFileToProject = async (req, res) => {
 
 projectCtrl.addActivityToProject = async (req, res) => {
     const { id } = req.params;
-    activityCtrl.createActivity(req.body, async (cb) => {
-        await Project.findByIdAndUpdate(id, {$addToSet: {activities: cb}});
+    await Project.findById(id)
+    .then((project) => {
+        if(project === null){
+            res.json({
+                status: 'Fail to Add Activity 1'
+            });
+        }
+        else{
+            activityCtrl.createActivity(req.body, async (cb) => {
+                await Project.findByIdAndUpdate(id, {$addToSet: {activities: cb}});
+            });
+            res.json({
+                status: 'Activity Added to Project'
+            });
+        }
     })
-    .then(()=>{
+    .catch(() => {
         res.json({
-            status: 'Activity Added to Project'
-        });
-    })
-    .catch(()=>{
-        res.json({
-            status: 'Activity Failed'
+            status: 'Fail to Add Activity 2'
         });
     });
 };//Checked

@@ -154,7 +154,7 @@
 								"idProject"
 							]
 						},
-						"description": "Add an activity"
+						"description": "Checked"
 					},
 					"response": []
 				},
@@ -214,7 +214,7 @@
 								"idProject"
 							]
 						},
-						"description": "Changes the designer in charge of the project, you need the\nproject's id and the new designer's id"
+						"description": "Checked"
 					},
 					"response": []
 				},
@@ -234,7 +234,7 @@
 							"raw": "{\n\t\"idNewResident\": \"id\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/projects/designer/idProject",
+							"raw": "http://localhost:3000/api/projects/resident/idProject",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -243,11 +243,11 @@
 							"path": [
 								"api",
 								"projects",
-								"designer",
+								"resident",
 								"idProject"
 							]
 						},
-						"description": "Changes the deigner in charge of the project, you need the\nproject's id and the new designer's id "
+						"description": "Checked"
 					},
 					"response": []
 				},
@@ -528,7 +528,7 @@
 								"idUser"
 							]
 						},
-						"description": "Get the all the projects of the user with that id"
+						"description": "Checked"
 					},
 					"response": []
 				},
@@ -1034,61 +1034,7 @@
 								"idActivity"
 							]
 						},
-						"description": "Get the activity with that id"
-					},
-					"response": []
-				},
-				{
-					"name": "Add Activity",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Activity\",\n\t\"description\": \"This is optional\",\n\t\"start\": \"2018-09-29T19:25:24.293Z\",\n\t\"end\": \"2018-10-06T19:25:24.293Z\",\n\t\"priority\": 1,\n\t\"objective\": \"This is optional too\",\n\t\"deliverable\": \"And this too\",\n\t\"finished\": false\n}"
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/activities/activity",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"activities",
-								"activity"
-							]
-						},
-						"description": "Add a new activity"
-					},
-					"response": []
-				},
-				{
-					"name": "Add Activities for New Project",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {},
-						"url": {
-							"raw": "http://localhost:3000/api/activities/newproject",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"activities",
-								"newproject"
-							]
-						},
-						"description": "Add activities for a new project, the activities dates are dependent from the actual date. YOU DONT NEED TO SEND ANY DATA"
+						"description": "Checked"
 					},
 					"response": []
 				},
@@ -1104,10 +1050,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Activity\",\n\t\"description\": \"This is optional\",\n\t\"start\": \"2018-09-29T19:25:24.293Z\",\n\t\"end\": \"2018-10-06T19:25:24.293Z\",\n\t\"priority\": 1,\n\t\"objective\": \"This is optional too\",\n\t\"deliverable\": \"And this too\",\n\t\"finished\": true\n}"
+							"raw": "{\n\t\"name\": \"ActivityEdited\",\n\t\"description\": \"This is optional edited\",\n\t\"start\": \"2018-09-29T19:25:24.293Z\",\n\t\"end\": \"2018-10-06T19:25:24.293Z\",\n\t\"priority\": 2,\n\t\"objective\": [\"FirstObjectiveEdited\", \"SecondObjectiveEdited\"],\n\t\"deliverable\": [\"FirstDelivarableEdited\", \"SecondDeliverableEdited\"]\n}"
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/activities/activity/id",
+							"raw": "http://localhost:3000/api/activities/activity/idActivity",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1117,10 +1063,10 @@
 								"api",
 								"activities",
 								"activity",
-								"id"
+								"idActivity"
 							]
 						},
-						"description": "Edit the activity with that id"
+						"description": "Checked"
 					},
 					"response": []
 				},
@@ -1131,7 +1077,7 @@
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "http://localhost:3000/api/activities/activity/id",
+							"raw": "http://localhost:3000/api/activities/activity/idActivity",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1141,60 +1087,10 @@
 								"api",
 								"activities",
 								"activity",
-								"id"
-							]
-						},
-						"description": "Delete the activity with that id"
-					},
-					"response": []
-				},
-				{
-					"name": "Join New Activities to New Project",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {},
-						"url": {
-							"raw": "http://localhost:3000/api/activities/newproject",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"activities",
-								"newproject"
-							]
-						},
-						"description": "This join the last 32 Activities to the last Project\nWARNING: Before you need to run the request \"Add Activities for New Project\""
-					},
-					"response": []
-				},
-				{
-					"name": "Get Comments",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/activities/comment/idActivity",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"activities",
-								"comment",
 								"idActivity"
 							]
 						},
-						"description": "Gets all the comments of the activity"
+						"description": "Delete the activity with that id"
 					},
 					"response": []
 				},
@@ -1227,106 +1123,7 @@
 								"idActivity"
 							]
 						},
-						"description": "Adds a comment to the activity"
-					},
-					"response": []
-				},
-				{
-					"name": "Add Objective",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"objective\": \"First Objective\"\n}"
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/activities/objective/idActivity",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"activities",
-								"objective",
-								"idActivity"
-							]
-						},
-						"description": "Add an objective to the activity"
-					},
-					"response": []
-				},
-				{
-					"name": "Add Deliverable to Activity",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"deliverable\": \"First Deliverable\"\n}"
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/activities/deliverable/idActivity",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"activities",
-								"deliverable",
-								"idActivity"
-							]
-						},
-						"description": "Adds a deliverable to an Activity"
-					},
-					"response": []
-				},
-				{
-					"name": "Change Priority of the activity",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"priority\": 1\n}"
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/activities/priority/idActivity",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"activities",
-								"priority",
-								"idActivity"
-							]
-						},
-						"description": "Changes the priority of the project"
+						"description": "Checked"
 					},
 					"response": []
 				},
@@ -1359,7 +1156,7 @@
 								"idActivity"
 							]
 						},
-						"description": "Starts the activity with a boolean"
+						"description": "Checked"
 					},
 					"response": []
 				},
@@ -1392,72 +1189,7 @@
 								"idActivity"
 							]
 						},
-						"description": "Finish an activity"
-					},
-					"response": []
-				},
-				{
-					"name": "Change Start Date Activity",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"start\": \"2018-11-13\"\n}"
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/activities/startdate/idActivity",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"activities",
-								"startdate",
-								"idActivity"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Change End Date of Activity",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"end\": \"2018-11-15\"\n}"
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/activities/enddate/5be4e901af62d3031b9d74b9",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"activities",
-								"enddate",
-								"5be4e901af62d3031b9d74b9"
-							]
-						},
-						"description": "Changes the end dtae of the activity"
+						"description": "Checked"
 					},
 					"response": []
 				},
@@ -1483,7 +1215,8 @@
 								"verifyObjectives",
 								"idActivity"
 							]
-						}
+						},
+						"description": "Checked"
 					},
 					"response": []
 				},
@@ -1509,7 +1242,8 @@
 								"verifyDeliverables",
 								"idActivity"
 							]
-						}
+						},
+						"description": "Checked"
 					},
 					"response": []
 				}

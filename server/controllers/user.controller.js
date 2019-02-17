@@ -6,8 +6,6 @@ const userCtrl = {};
 const CryptoJS = require("crypto-js");
 
 userCtrl.getUsers = async (req, res) => {
-    //populate().exec() es para agregar los datos de los objetos projects
-    //en populate va el nombre del dato como esta en el schema User NO EL NOMBRE DEL SCHEMA PROJECT
     const user = await User.find().populate('projects').exec();
     res.json(user);
 };//Development Tool

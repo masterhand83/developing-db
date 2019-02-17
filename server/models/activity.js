@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-const Comment = require('../models/comment')
 
 const ActivitySchema = new Schema({
     name: { type: String, required: true, unique: true },
@@ -14,8 +13,12 @@ const ActivitySchema = new Schema({
     deliverablesVerified: { type: Boolean, default: false, required: true },
     started: { type: Boolean, default: false, required: true },
     finished: { type: Boolean, default: false, required: true },
-    comments: [{ type: Schema.Types.ObjectId, ref: "Comment", default: [], required: true }],
-    color: { type: String, default: '#000000', required: true }
+    color: { type: String, default: '#000000', required: true },
+    comments: [{
+        authorName: { type: String, required: true },
+        comment: { type: String, required: true },
+        date: { type: Date, required: true }
+    }]
 });
 
 module.exports = mongoose.model('Activity', ActivitySchema);

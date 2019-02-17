@@ -1,6 +1,5 @@
 const Activity = require('../models/activity');
 const Project = require('../models/project');
-const commentCtrl = require('../controllers/comment.controller');
 const activityCtrl = {};
 
 var moment = require('moment');
@@ -67,33 +66,13 @@ activityCtrl.createActivity = async (data,cb) => {
     cb(activity._id);
 };//External Checked
 
-activityCtrl.addObjective = async (req, res) => {
-    const { id } = req.params;
-    const { objective } = req.body;
-    await Activity.findByIdAndUpdate(id, { $set: { objectivesVerified: false } });
-    await Activity.findByIdAndUpdate(id, { $addToSet: { objective: objective } });
-    res.json({
-        status: 'Objective Added to Activity'
-    });
-};
-
-activityCtrl.addDeliverable = async (req, res) => {
-    const { id } = req.params;
-    const { deliverable } = req.body;
-    await Activity.findByIdAndUpdate(id, { $set: { deliverablesVerified: false } });
-    await Activity.findByIdAndUpdate(id, { $addToSet: { deliverable: deliverable } });
-    res.json({
-        status: 'Deliverable Added to Activity'
-    });
-};
-
 activityCtrl.verifyObjectives = async (req, res) => {
     const { id } = req.params;
     await Activity.findByIdAndUpdate(id, { $set: { objectivesVerified: true } });
     res.json({
         status: 'Objectives Verified'
     });
-};
+};//Checked
 
 activityCtrl.verifyDeliverables = async (req, res) => {
     const { id } = req.params;
@@ -101,38 +80,49 @@ activityCtrl.verifyDeliverables = async (req, res) => {
     res.json({
         status: 'Deliverables Verified'
     });
-};
+};//Checked
 
-activityCtrl.editPriority = async (req, res) => {
+activityCtrl.editActivity = async (req, res) => {
     const { id } = req.params;
-    const { priority } = req.body;
+    const { objective } = req.body;
+    const { deliverable } = req.body;
     const activity = await Activity.findById(id);
-    activity.priority = priority;
+    activity.name = req.body.name;
+    activity.description = req.body.description;
+    activity.start = req.body.start;
+    activity.end = req.body.end;
+    activity.priority = req.body.priority;
+    if (activity.deliverable.toString() !== deliverable.toString()) {
+        activity.deliverablesVerified = false;
+        activity.deliverable = deliverable;
+    }
+    if (activity.objective.toString() !== objective.toString()) {
+        activity.objectivesVerified = false;
+        activity.objective = objective;
+    }
     await Activity.findByIdAndUpdate(id, {$set: activity});
     res.json({
-        status: 'Priority changed'
+        status: 'Activity changed'
     });
-};
+};//Checked
 
 activityCtrl.getActivity = async (req, res) => {
     const { id } = req.params;
-    const activity = await Activity.findById(id).populate('comments').exec();
+    const activity = await Activity.findById(id, { color: 0 });
     res.json(activity);
-};
-
-activityCtrl.getComments = async (req, res) => {
-    const { id } = req.params;
-    const { comments } = await Activity.findById(id).populate('comments').exec();
-    res.json(comments);
-};
+};//Checked
 
 activityCtrl.addComment = async (req, res) => {
     const { id } = req.params;
     const { comments } = await Activity.findById(id);
-    if (comments.length < 50) {
-        commentCtrl.addComment(req.body, async(cb) => {
-            await  Activity.findByIdAndUpdate(id, {$addToSet: {comments: cb}});
-        });
+    var now = moment();
+    const comment = {
+        authorName: req.body.authorName,
+        comment: req.body.comment,
+        date: now
+    };
+    if (comments.length <= 50) {
+        await Activity.findByIdAndUpdate(id, {$addToSet: {comments: comment}});
         res.json({
             status: 'Comment Saved'
         });
@@ -141,70 +131,35 @@ activityCtrl.addComment = async (req, res) => {
             status: 'Comments Full'
         });
     }
-};
+};//Checked
 
 activityCtrl.startActivity = async (req, res) => {
     const { id } = req.params;
-    const activity = await Activity.findById(id);
-    activity.started = true;
-    activity.color = '#F0ED0E';
-    await Activity.findByIdAndUpdate(id, {$set: activity}, {new: true});
+    await Activity.findByIdAndUpdate(id, {$set: { started: true, color: '#F0ED0E' }});
     res.json({
         status: 'Activity started'
     });
-};
-
-activityCtrl.changeStartDateActivity = async (req, res) => {
-    const { id } = req.params;
-    const activity = await Activity.findById(id);
-    var start = moment(req.body.start);
-    activity.start = start;
-    await Activity.findByIdAndUpdate(id, {$set: activity}, {new: true});
-    res.json({
-        status: 'Start Date Changed'
-    });
-};
-
-activityCtrl.changeEndDateActivity = async (req, res) => {
-    const { id } = req.params;
-    const activity = await Activity.findById(id);
-    var end = moment(req.body.end);
-    activity.end = end;
-    await Activity.findByIdAndUpdate(id, {$set: activity}, {new: true});
-    res.json({
-        status: 'End Date Changed'
-    });
-};
+};//Checked
 
 activityCtrl.finishActivity = async (req, res) => {
     const { id } = req.params;
-    const activity = await Activity.findById(id);
-    activity.finished = true;
-    activity.color = '#58C423';
-    await Activity.findByIdAndUpdate(id, {$set: activity}, {new: true});
+    await Activity.findByIdAndUpdate(id, {$set: { finished: true, color: '#58C423' }});
     res.json({
         status: 'Activity finished'
     });
-};
+};//Checked
 
 activityCtrl.deleteActivity = async (req, res) => {
     const { id } = req.params;
     const activity = await Activity.findById(id);
-    for(var item of activity.comments){
-        commentCtrl.deleteComments(item);
-    }
     await Project.findOneAndUpdate({activities: id}, {$pull: {activities: id}});
     await Activity.findByIdAndRemove(id);
     res.json({
         status: 'Activity '+activity.name+' Deleted'
     });
-};
+};//Checked
 
 activityCtrl.deleteActivities = async (id) => {
-    const { comments } = await Activity.findById(id);
-    for(var item of comments){
-        commentCtrl.deleteComments(item);
-    }  
     await Activity.findByIdAndRemove(id);
 };//External Checked
 

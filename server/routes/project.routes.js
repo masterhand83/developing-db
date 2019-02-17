@@ -3,8 +3,8 @@ const router = express.Router();
 
 const project = require('../controllers/project.controller');
 
-router.put('/resident/:id', project.changeResidentInCharge);
-router.put('/designer/:id', project.changeDesignerInCharge);
+router.put('/resident/:id', project.changeResidentInCharge);//Checked
+router.put('/designer/:id', project.changeDesignerInCharge);//Checked
 router.post('/alert/:id', project.addAlertToProject);//Checked
 router.get('/info/:id', project.getInformation);//Checked
 router.get('/message/:id',project.getMessagesProject);//Checked

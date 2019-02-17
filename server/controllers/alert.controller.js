@@ -29,9 +29,22 @@ alertCtrl.newProjectAlert = async (idUser, id) => {
     await User.findByIdAndUpdate( idUser, { $addToSet: { alerts: { projectId: id, alert: [ newAlert._id ] } } } );
 };//External Checked
 
+alertCtrl.deleteUserAlerts = async (idProject, idUser) => {
+    const user = await User.findById(idUser);
+    var alerts = Array.from(user.alerts);
+    if (alerts.length !== 0) {
+        let obj = await alerts.find( item => {
+            return item.projectId == idProject;
+        });
+        for (var alert of obj.alert) {
+            await Alert.findByIdAndDelete(alert);
+        }
+        await User.findByIdAndUpdate( idUser, { $pull: { alerts: { projectId: idProject } } } );
+    }
+};//External Checked
+
 alertCtrl.deleteAlerts = async (id) => {
     const users = await User.find( { 'alerts.projectId': id }, { alerts: 1 } ).lean();
-    console.log(users[0].alerts);
     for (var array of users) {
         var alerts = Array.from(array.alerts);
         let obj = await alerts.find( item => {
