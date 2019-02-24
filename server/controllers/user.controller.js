@@ -122,9 +122,14 @@ userCtrl.addProjectToUser = async (idUser, idProject) => {
 
 userCtrl.deleteUser = async (req, res) => {
     const { id } = req.params
-    const user = await User.findById(id);
-    await User.findByIdAndRemove(id)
-        .then(function () {
+    const { projects } = await User.findById(id);
+    if (projects.length != 0) {
+        res.json({
+            status: 'User in charge of projects, you cant delete it'
+        });
+    } else {
+        await User.findByIdAndRemove(id)
+        .then(function (user) {
             res.json({
                 status: 'User '+user.name+' Deleted'
             });
@@ -134,7 +139,8 @@ userCtrl.deleteUser = async (req, res) => {
                 status: 'Failed to Delete User'
             });
         });
-};
+    }
+};//Checked
 
 userCtrl.getAlerts = async (req, res) => {
     const { id } = req.params;

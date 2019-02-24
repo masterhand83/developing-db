@@ -770,7 +770,7 @@
 								"idUser"
 							]
 						},
-						"description": "Delete the user, you need the '_id' of the user"
+						"description": "Checked"
 					},
 					"response": []
 				},
@@ -1090,7 +1090,7 @@
 								"idActivity"
 							]
 						},
-						"description": "Delete the activity with that id"
+						"description": "Checked"
 					},
 					"response": []
 				},

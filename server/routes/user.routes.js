@@ -9,7 +9,7 @@ router.get('/users', user.viewUsers);//Checked -----------|
 router.get('/user/:id', user.getUser);//Checked
 router.get('/project/:id', user.getUserProjects);//Checked
 router.put('/user/:id', user.editUser);//Checked
-router.delete('/user/:id', user.deleteUser);
+router.delete('/user/:id', user.deleteUser);//Checked
 router.post('/login', user.login);//Checked
 router.get('/alert/:id', user.getAlerts);//Checked
 router.delete('/alert/:id', user.deleteAlert);//Checked
