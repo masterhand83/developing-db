@@ -163,7 +163,7 @@ userCtrl.login = async (req, res) => {
     var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
     const { email } = decryptedData;
     const { password } = decryptedData;
-    const user = await User.find({ email: email, password: password }, { userType: 1 });
+    const user = await User.find({ email: email, password: password }, { name: 1, userType: 1 });
     var cryptedUser = new Array();
     for(const item of user){
         var cryptedData = CryptoJS.AES.encrypt(JSON.stringify(item), 'secret key 117');
@@ -171,6 +171,13 @@ userCtrl.login = async (req, res) => {
         cryptedUser.push(cryptedText);
     }
     res.json(cryptedUser);
+};//Checked
+
+userCtrl.loginAndroid = async (req, res) => {
+    const { email } = req.body;
+    const { password } = req.body;
+    const user = await User.find({ email: email, password: password }, { name: 1, userType: 1 });
+    res.json(user);
 };//Checked
 
 module.exports = userCtrl;
