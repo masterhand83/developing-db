@@ -57,4 +57,14 @@ alertCtrl.deleteAlerts = async (id) => {
     }
 };//External Checked
 
+alertCtrl.getProjectAlerts = async (req, res) => {
+    const { idUser } = req.body;
+    const { idProject } = req.body;
+    const { alerts } = await User.findById(idUser).populate('alerts.alert').populate('alerts.projectId', 'name');
+    let projectAlerts = await alerts.find( item => {
+        return item.projectId._id == idProject;
+    });
+    res.json(projectAlerts);
+}//Checked
+
 module.exports = alertCtrl;

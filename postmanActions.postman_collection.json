@@ -875,106 +875,6 @@
 					]
 				},
 				{
-					"name": "Login User Android",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"email\": \"email@email.com\",\n\t\"password\": \"123\"\n}"
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/users/loginAndroid",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"users",
-								"loginAndroid"
-							]
-						},
-						"description": "Checked"
-					},
-					"response": [
-						{
-							"name": "Login User",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n\t\"email\": \"email@email.com\",\n\t\"password\": \"123\"\n}"
-								},
-								"url": {
-									"raw": "http://localhost:3000/api/users/login",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "3000",
-									"path": [
-										"api",
-										"users",
-										"login"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Access-Control-Allow-Origin",
-									"value": "http://localhost:4200"
-								},
-								{
-									"key": "Vary",
-									"value": "Origin"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "159"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"9f-Ss+tayTuwelP5z5Y33u5YhKpj0M\""
-								},
-								{
-									"key": "Date",
-									"value": "Sun, 11 Nov 2018 01:55:03 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								}
-							],
-							"cookie": [],
-							"body": "[\n    {\n        \"projects\": [],\n        \"_id\": \"5be787eca8699908edae159b\",\n        \"name\": \"General Manager\",\n        \"email\": \"email@email.com\",\n        \"password\": \"123\",\n        \"mobile\": 5530318080,\n        \"userType\": 0,\n        \"__v\": 0\n    }\n]"
-						}
-					]
-				},
-				{
 					"name": "Get Residents",
 					"request": {
 						"method": "GET",
@@ -1499,6 +1399,78 @@
 							]
 						},
 						"description": "Development Tool"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Android Actions",
+			"item": [
+				{
+					"name": "Get Alerts of User by Project",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"idUser\": \"idUser\",\n    \"idProject\": \"idProject\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/android/alerts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"android",
+								"alerts"
+							]
+						},
+						"description": "Checked"
+					},
+					"response": []
+				},
+				{
+					"name": "Login User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"email@email.com\",\n\t\"password\": \"123\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/android/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"android",
+								"login"
+							]
+						},
+						"description": "Checked"
 					},
 					"response": []
 				}
