@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "5ef4f09c-29bc-4631-a1eb-f6d8f679dae8",
-		"name": "postmanActions",
+		"_postman_id": "f626a97e-3287-4515-8bf6-534cc7fa459c",
+		"name": "postmanActions Copy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -1300,33 +1300,6 @@
 								"files",
 								"file",
 								"idFile"
-							]
-						},
-						"description": "Checked"
-					},
-					"response": []
-				},
-				{
-					"name": "Download PDF",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "http://localhost:3000/api/pdfs/pdf/idProject",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"pdfs",
-								"pdf",
-								"idProject"
 							]
 						},
 						"description": "Checked"
