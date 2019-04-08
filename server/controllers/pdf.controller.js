@@ -4,11 +4,31 @@ const Project = require('../models/project');
 const User = require('../models/user');
 
 const PDFDocument = require('pdfkit');
+var sizeOf = require('image-size');
 var moment = require('moment');
 moment().format();
 moment.locale('es');
 
 pdfCtrl.createPDF = async (req, res) => {
+  const doc = new PDFDocument({
+    info: {
+      Title: 'Informe',
+      Author: 'Virtual Assistant'
+    }
+  });
+  sizeOf('uploads/'+req.file.filename, function (err, dimensions) {
+    console.log(dimensions.width, dimensions.height);
+  });
+  res.json({});
+  /*doc.image('uploads/'+req.file.filename);
+  res.writeHead(200, {
+    'Content-Type': 'application/pdf',
+    'Access-Control-Allow-Origin': '*',
+    'Content-Disposition': 'attachment; filename=Informe.pdf'
+  });
+  doc.pipe(res);
+  doc.end();*/
+  /*
   const { id } = req.params;
   var now = moment().format('L');
   await Project.findById(id)
@@ -111,11 +131,11 @@ pdfCtrl.createPDF = async (req, res) => {
     });
     doc.font('Courier-Oblique').fontSize(9).text('Generado el ' + now, 248, 710);
     doc.addPage();
-    /*res.writeHead(200, {
+    res.writeHead(200, {
       'Content-Type': 'application/pdf',
       'Access-Control-Allow-Origin': '*',
       'Content-Disposition': 'attachment; filename=Informe.pdf'
-    });*/
+    });
     doc.pipe(res);
     doc.end();
   })
@@ -124,6 +144,7 @@ pdfCtrl.createPDF = async (req, res) => {
       status: 'No File'
     });
   });
+  */
   };//Almost Finished
 
 module.exports = pdfCtrl;
