@@ -64,7 +64,11 @@ alertCtrl.getProjectAlerts = async (req, res) => {
     let projectAlerts = await alerts.find( item => {
         return item.projectId._id == idProject;
     });
-    res.json(projectAlerts);
+    var newAlerts = new Array();
+    for (var item of projectAlerts.alert) {
+        newAlerts.push(item);
+    }
+    res.json(newAlerts);
 }//Checked
 
 module.exports = alertCtrl;
