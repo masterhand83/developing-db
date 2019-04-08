@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "f626a97e-3287-4515-8bf6-534cc7fa459c",
+		"_postman_id": "b1c6d84e-ee80-4c28-ba7d-ba11f8b4d62c",
 		"name": "postmanActions Copy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -1382,11 +1382,8 @@
 			"item": [
 				{
 					"name": "Get Alerts of User by Project",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [
 							{
 								"key": "Content-Type",
