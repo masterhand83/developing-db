@@ -112,13 +112,27 @@ pdfCtrl.createPDF = async (req, res) => {
         align: 'justify'
       });
       doc.font('Courier-Oblique').fontSize(9).text('Generado el ' + now, 248, 710);
-      doc.addPage();
-      if (dimensions.width >= doc.page.width) {
-        doc.image(URI, 15,60, {
-          width: (doc.page.width-30)
-        });
+      doc.addPage({
+        size: 'letter',
+        layout: 'landscape'
+      });
+      if (dimensions.height >= doc.page.height) {
+        var newHeight = (doc.page.height - 30);
+        var newWidth = (newHeight * dimensions.width)/dimensions.height;
+        if(newWidth >= doc.page.width){
+          newWidth = (doc.page.width - 30);
+          newHeight = (newWidth * dimensions.height)/dimensions.width;
+          doc.image(URI, 15, (doc.page.height - newHeight)/2, {
+            width: newWidth
+          });
+        }
+        else{
+          doc.image(URI, (doc.page.width - newWidth)/2, 15, {
+            height: newHeight
+          });
+        }
       } else {
-        doc.image(URI, (doc.page.width - dimensions.width)/2);
+        doc.image(URI, (doc.page.width - dimensions.width)/2, (doc.page.height - dimensions.height)/2);
       }
       res.writeHead(200, {
         'Content-Type': 'application/pdf',
