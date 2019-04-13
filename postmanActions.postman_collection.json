@@ -1332,6 +1332,45 @@
 						"description": "Checked"
 					},
 					"response": []
+				},
+				{
+					"name": "Download PDF Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": ""
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/pdfs/pdf/idProject",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"pdfs",
+								"pdf",
+								"idProject"
+							]
+						},
+						"description": "Checked"
+					},
+					"response": []
 				}
 			]
 		},
@@ -1409,11 +1448,8 @@
 			"item": [
 				{
 					"name": "Get Alerts of User by Project",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [
 							{
 								"key": "Content-Type",
