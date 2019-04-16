@@ -133,6 +133,22 @@ activityCtrl.addComment = async (req, res) => {
     }
 };//Checked
 
+activityCtrl.getCommentsAndroid = async (req, res) => {
+    const { id } = req.params;
+    const { comments } = await Activity.findById(id);
+    res.json(comments);
+};//Checked
+
+activityCtrl.changePriorityAndroid = async (req, res) => {
+    const { id } = req.params;
+    const { priority } = req.body;
+    console.log(priority);
+    await Activity.findByIdAndUpdate(id, { 'priority': priority });
+    res.json({
+        status: 'Priority Changed'
+    });
+};//Checked
+
 activityCtrl.startActivity = async (req, res) => {
     const { id } = req.params;
     await Activity.findByIdAndUpdate(id, {$set: { started: true, color: '#F0ED0E' }});
