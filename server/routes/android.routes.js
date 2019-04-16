@@ -6,5 +6,6 @@ const alert = require('../controllers/alert.controller');
 
 router.post('/login', user.loginAndroid);//Checked
 router.post('/alerts', alert.getProjectAlerts);//Checked
-
+router.get('/comment/:id', activity.getCommentsAndroid);//Checked
+router.put('/priority/:id', activity.changePriorityAndroid);//Checked
 module.exports = router;
