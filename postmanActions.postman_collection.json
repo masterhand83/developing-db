@@ -1482,6 +1482,33 @@
 						"description": "Checked"
 					},
 					"response": []
+				},
+				{
+					"name": "Get Comments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/android/comment/idActivity",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"android",
+								"comment",
+								"idActivity"
+							]
+						},
+						"description": "Checked"
+					},
+					"response": []
 				}
 			]
 		}
