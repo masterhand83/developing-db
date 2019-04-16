@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "b1c6d84e-ee80-4c28-ba7d-ba11f8b4d62c",
+		"_postman_id": "97db1ab9-5d7a-4ca1-a52b-43080d872687",
 		"name": "postmanActions Copy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -1441,6 +1441,66 @@
 							]
 						},
 						"description": "Checked"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Comments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/android/comment/idActivity",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"android",
+								"comment",
+								"idActivity"
+							]
+						},
+						"description": "Checked"
+					},
+					"response": []
+				},
+				{
+					"name": "Change Priority",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"priority\": 0\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/android/priority/idActivity",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"android",
+								"priority",
+								"idActivity"
+							]
+						},
+						"description": "Checkes"
 					},
 					"response": []
 				}
