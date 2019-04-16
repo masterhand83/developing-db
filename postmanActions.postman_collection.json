@@ -1509,6 +1509,39 @@
 						"description": "Checked"
 					},
 					"response": []
+				},
+				{
+					"name": "Change Priority",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"priority\": 0\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/android/priority/idActivity",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"android",
+								"priority",
+								"idActivity"
+							]
+						},
+						"description": "Checkes"
+					},
+					"response": []
 				}
 			]
 		}
