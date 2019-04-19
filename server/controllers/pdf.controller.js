@@ -3,6 +3,8 @@ const pdfCtrl = {};
 const Project = require('../models/project');
 const User = require('../models/user');
 
+const { unlink } = require('fs-extra');
+const path = require('path');
 const PDFDocument = require('pdfkit');
 var sizeOf = require('image-size');
 var moment = require('moment');
@@ -141,9 +143,11 @@ pdfCtrl.createPDF = async (req, res) => {
       });
       doc.pipe(res);
       doc.end();
+      unlink(path.resolve('./uploads/' + req.file.filename));
     });
   })
   .catch(() => {
+    unlink(path.resolve('./uploads/' + req.file.filename));
     res.json({
       status: 'No File'
     });
