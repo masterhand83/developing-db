@@ -114,10 +114,7 @@ pdfCtrl.createPDF = async (req, res) => {
         align: 'justify'
       });
       doc.font('Courier-Oblique').fontSize(9).text('Generado el ' + now, 248, 710);
-      doc.addPage({
-        size: 'letter',
-        layout: 'landscape'
-      });
+      doc.addPage();
       if (dimensions.height >= doc.page.height) {
         var newHeight = (doc.page.height - 30);
         var newWidth = (newHeight * dimensions.width)/dimensions.height;

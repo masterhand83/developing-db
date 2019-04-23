@@ -36,9 +36,10 @@ app.use('/api/activities', require('./routes/activity.routes'));
 app.use('/api/crypto', require('./routes/crypto.routes'));
 app.use('/api/files', require('./routes/file.routes'));
 app.use('/api/android', require('./routes/android.routes'));
-/*app.get('*', (req,res)=>{
+app.use('/api/pdfs', require('./routes/pdf.routes'));
+app.get('*', (req,res)=>{
     res.sendFile(path.join(__dirname,'public/index.html'));
-});*/
+});
 
 //  Static files
 app.use(express.static(path.resolve('./')));
